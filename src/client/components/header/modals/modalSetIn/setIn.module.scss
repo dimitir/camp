@@ -1,0 +1,41 @@
+.modal {
+    font-size: 12px;
+    padding: 0;
+    max-width: 600px;
+    margin: auto;
+    .header {
+        margin-top: 40px;
+        width: 100%;
+        font-size: 30px;
+        text-align: center;
+        padding: 5px;
+    }
+    .describe {
+        margin: auto;
+        font-size: 18px;
+        width: 80%;
+        padding: 10px 5px;
+    }
+    .singInBlock {
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    .singInLink {
+        display: block;
+        border: solid 1px #333333;
+        width: 100%;
+        max-width: 190px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-radius: 3px;
+    }
+    .singInLink>a {
+        text-decoration: none;
+    }
+}
