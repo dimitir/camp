@@ -1,0 +1,23 @@
+.appBar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.novLinks {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &>* {
+        margin-right: 20px;
+    }
+
+}
+
+.link {
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+}
