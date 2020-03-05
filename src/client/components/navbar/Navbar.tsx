@@ -1,23 +1,22 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/StarBorder';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import style from './navbar.module.scss';
 
-const MainPage = () => {
+import { PropTypes_Navbar } from './NavbarContainer';
+import style from './navbar.scss';
+import modalName from '../../store/modals/modalNameConstants';
+
+const Navbar: React.FC<PropTypes_Navbar> = ({ openModal }: PropTypes_Navbar) => {
+
+    const test = () => {
+        console.log('testik');
+    }
 
     return (
         <>
@@ -29,17 +28,29 @@ const MainPage = () => {
                    </Typography>
                     <div className={style.novLinks}>
 
-                        <Link variant="button" color="textPrimary" href="#" className={style.link}>
+                        <Link
+                            variant="button"
+                            color="textPrimary" href="#"
+                            className={style.link}>
                             Trips
                         </Link>
-                        <Link variant="button" color="textPrimary" href="#" className={style.link}>
+                        <Link
+                            variant="button"
+                            color="textPrimary"
+                            href="#"
+                            className={style.link}>
                             Blog
                        </Link>
-                        <Link variant="button" color="textPrimary" href="#" className={style.link}>
+                        <Link variant="button" color="textPrimary" href="#"
+                            className={style.link}>
                             Info
                         </Link>
 
-                        <Button href="#" color="primary" variant="outlined" className={style.link}>
+                        <Button
+                            href="#"
+                            color="primary"
+                            variant="outlined"
+                            className={style.link} onClick={() => openModal(modalName.SING_IN_NAME)}>
                             Login
                        </Button>
                     </div>
@@ -50,4 +61,4 @@ const MainPage = () => {
     )
 }
 
-export default MainPage;
+export default Navbar;

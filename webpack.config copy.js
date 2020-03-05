@@ -32,24 +32,7 @@ module.exports = (env, argv) => {
         exclude: /node_modules/
       },
       {
-        test: /\.global\.s(a|c)ss$/,
-        loader: [
-          isDevelopmentMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            }
-          },
-          {
-            loader: 'sass-loader',
-          }
-        ]
-      },
-
-      {
-        test: /\.s(a|c)ss$/,
-        exclude: /\.global.(s(a|c)ss)$/,
+        test: /\.module\.s(a|c)ss$/,
         loader: [
           isDevelopmentMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           { loader: "css-modules-typescript-loader" },
@@ -60,6 +43,23 @@ module.exports = (env, argv) => {
               modules: {
                 localIdentName: '[local]___[hash:base64:5]',
               }
+            }
+          },
+          {
+            loader: 'sass-loader',
+          }
+        ]
+      },
+
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        loader: [
+          isDevelopmentMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
             }
           },
           {

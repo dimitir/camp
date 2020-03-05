@@ -3,7 +3,9 @@ import React from 'react'
 import './app.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainPageContainer from './components/mainPage/MainPageContainer';
-import Navbar from './components/navbar/Navbar';
+import NavbarContainer from './components/navbar/NavbarContainer';
+import ContainerModalsCreator from './components/modals/ContainerModalsCreator';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 export default class App extends Component {
 
@@ -11,8 +13,10 @@ export default class App extends Component {
 
         return (
             <>
+             <CssBaseline />
+                <ContainerModalsCreator />
                 <Router>
-                    <Navbar />
+                    <NavbarContainer />
                     <Switch>
                         <Route component={MainPageContainer} path='/' exact />
                     </Switch>
