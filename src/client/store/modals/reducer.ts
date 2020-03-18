@@ -1,4 +1,4 @@
-import dispatchAction from '../_RootStore/dispatchActions';
+import dispatchAction from '../_RootStore/dispatchActionsList';
 import { ShowModalType } from '../_RootStore/types';
 
 const initialState = {
@@ -19,6 +19,7 @@ const modalsReducer = (state = initialState, action: ShowModalType) => {
             return {
                 ...state,
                 showModal: false,
+                typeModal: '',
             }
 
         default: return state;

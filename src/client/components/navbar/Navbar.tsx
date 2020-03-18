@@ -10,7 +10,7 @@ import Link from '@material-ui/core/Link';
 
 import { PropTypes_Navbar } from './NavbarContainer';
 import style from './navbar.scss';
-import modalName from '../../store/modals/modalNameConstants';
+import modalName from '../../store/modals/modalNamesList';
 
 const Navbar: React.FC<PropTypes_Navbar> = ({ openModal }: PropTypes_Navbar) => {
 
@@ -50,7 +50,7 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ openModal }: PropTypes_Navbar) => 
                             href="#"
                             color="primary"
                             variant="outlined"
-                            className={style.link} onClick={() => openModal(modalName.SING_IN_NAME)}>
+                            className={style.link} onClick={() => openModal(modalName.SING_UP_ALL_NAME_MODAL)}>
                             Login
                        </Button>
                     </div>

@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 
 import Navbar from './Navbar';
 import { showModal } from '../../store/modals/actions';
-import modalName from '../../store/modals/modalNameConstants';
+import modalName from '../../store/modals/modalNamesList';
 
 
 

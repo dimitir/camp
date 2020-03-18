@@ -16,6 +16,13 @@ export interface CloseModalType {
     type: string
 }
 
+
+export interface TypeSendEmail {
+    type: string;
+    email: string;
+}
+
+
 const initialState = {
     showModal: false,
     typeModal: ''
