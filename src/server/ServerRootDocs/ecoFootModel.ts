@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 
 const authShema = mongoose.Schema({
     jwt: String,
+    email: String,
     auth: Boolean,
 });
 
-exports.AuthModel = mongoose.model("ecoAuths", authShema);
+
+module.exports.AuthModel = mongoose.model("ecoAuths", authShema);

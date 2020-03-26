@@ -1,12 +1,14 @@
 const express = require('express');
-import { Request, Response } from 'express';
+
+export { };
 const mongoose = require('mongoose');
+
 mongoose.Promise = require('bluebird');
-const jwt = require('jsonwebtoken');
-const { portServer, jwtSecret } = require('./ServerRootDocs/_dotEnvConfig.ts');
-import { authUserItem } from './ServerRootDocs/typesServer';
-const AuthModel = require('./ServerRootDocs/ecoFootModel').AuthModel;
+const { portServer } = require('./ServerRootDocs/envConfig.ts');
 const routsApp = require('./routs.ts');
+
+console.log(portServer);
+console.log(process.env.DEV);
 
 const app = express();
 

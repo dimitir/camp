@@ -10,9 +10,15 @@
         "target": "es6",
         "allowJs": true,
         "jsx": "react",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+       
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*", "src/server/ServerRootDocs/envConfig.ts"
     ]
 }
+
+
+
+
+

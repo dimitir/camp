@@ -3,6 +3,7 @@ import { take, call } from 'redux-saga/effects';
 import actionsList from '../_RootStore/dispatchActionsList';
 
 async function fetchEmail(email: string) {
+    console.log('111111111111');
     const data = {
         email: email
     }
@@ -16,6 +17,7 @@ async function fetchEmail(email: string) {
         })
         const dataRespond = await response.json();
         localStorage.setItem('token', dataRespond.jwt);
+        localStorage.setItem('expectFirstAuth', 'expect');
         console.log(localStorage.getItem('token'));
 
     } catch (err) {

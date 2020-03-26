@@ -1,10 +1,8 @@
 const express = require('express');
-const { portServer, jwtSecret } = require('./ServerRootDocs/_dotEnvConfig.ts');
-const jwt = require('jsonwebtoken');
+const { portServer } = require('../../../envConfig.ts');
 
 
 export const app = express();
-const jsonParser = express.json();
 
 const port: number = portServer || 8080;
 const startServer = () => {

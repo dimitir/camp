@@ -2,12 +2,33 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const webpack = require("webpack");
 const outputDirectory = 'dist';
-
+const dotenv = require('dotenv');
+const fs = require("fs");
+// const fs = eval('require("fs")');
 module.exports = (env, argv) => {
   const isDevelopmentMode = (argv.mode === 'development');
-  console.log(isDevelopmentMode);
+
+  const currentPath = path.join(__dirname);
+  const basePath = currentPath + '/.env';
+
+  // We're concatenating the environment name to our filename to specify the correct env file!
+  const envPath = basePath + '.' + env.ENVIRONMENT;
+
+  // Check if the file exists, otherwise fall back to the production .env
+  const finalPath = fs.existsSync(envPath) ? envPath : basePath;
+  // Set the path parameter in the dotenv config
+  const fileEnv = dotenv.config({ path: finalPath }).parsed;
+
+
+  const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
+    return prev;
+  }, {})
+
+  console.log(envKeys);
+
 
   return {
     entry: ['babel-polyfill', './src/client/main.tsx'],
@@ -110,7 +131,7 @@ module.exports = (env, argv) => {
         '/api': 'http://localhost:8080'
       }
     },
-
+    node: { fs: 'empty' },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
@@ -120,8 +141,11 @@ module.exports = (env, argv) => {
       new MiniCssExtractPlugin({
         filename: isDevelopmentMode ? '[name].css' : '[name].[hash].css',
         chunkFilename: isDevelopmentMode ? '[id].css' : '[id].[hash].css'
-      })
+      }),
+      new webpack.DefinePlugin(envKeys)
     ]
   };
 };
 
+
+// "process.env.JWT_SECRET": JSON.stringify("aCoolValue")
