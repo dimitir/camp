@@ -1,19 +1,13 @@
 const express = require('express');
-
 export { };
 const mongoose = require('mongoose');
-
 mongoose.Promise = require('bluebird');
-const { portServer } = require('./ServerRootDocs/envConfig.ts');
 const routsApp = require('./routs.ts');
-
-console.log(portServer);
-console.log(process.env.DEV);
-
 const app = express();
 
-const port: number = portServer || 8080;
+const port = process.env.PORT || 8080;
 const startServer = () => {
+    console.log(port);
     app.listen(port, () => console.log(`App started on port ${port}`));
 }
 

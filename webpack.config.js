@@ -6,19 +6,14 @@ const webpack = require("webpack");
 const outputDirectory = 'dist';
 const dotenv = require('dotenv');
 const fs = require("fs");
-// const fs = eval('require("fs")');
+
 module.exports = (env, argv) => {
   const isDevelopmentMode = (argv.mode === 'development');
 
   const currentPath = path.join(__dirname);
   const basePath = currentPath + '/.env';
-
-  // We're concatenating the environment name to our filename to specify the correct env file!
   const envPath = basePath + '.' + env.ENVIRONMENT;
-
-  // Check if the file exists, otherwise fall back to the production .env
   const finalPath = fs.existsSync(envPath) ? envPath : basePath;
-  // Set the path parameter in the dotenv config
   const fileEnv = dotenv.config({ path: finalPath }).parsed;
 
 
@@ -26,8 +21,6 @@ module.exports = (env, argv) => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {})
-
-  console.log(envKeys);
 
 
   return {

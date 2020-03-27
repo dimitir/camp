@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 const { AuthModel } = require('../ServerRootDocs/ecoFootModel.ts');
-const { jwtSecret } = require('../ServerRootDocs/envConfig.ts');
 const jwt = require('jsonwebtoken');
 const { generateJwt } = require('./login.ts');
 const createError = require('http-errors');
@@ -36,8 +35,7 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 
     let decoded;
     try {
-        decoded = jwt.verify(token, jwtSecret);
-        // console.log(decoded);
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch {
         return next(createError(403, 'cennot verify jwt, decoded failed'));
 
@@ -63,7 +61,7 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 
 
         try {
-            const newJwt = generateJwt(jwtSecret, 1460);
+            const newJwt = generateJwt(process.env.JWT_SECRET, 1460);
             const id = findUser._id;
             const setData = await AuthModel.findOneAndUpdate(id, { jwt: newJwt, auth: true });
             res.send(setData);

@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 const AuthModel = require('../ServerRootDocs/ecoFootModel.ts').AuthModel;
-const { jwtSecret, mailAccaunt, mailPassword, host } = require('../ServerRootDocs/envConfig.ts');
 import { authUserItem } from '../ServerRootDocs/typesServer';
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
@@ -11,7 +10,7 @@ const HttpStatus = require('http-status-codes');
 const generateJwt = (email: string, expireHoursTime: number) => {
     const date = new Date();
     date.setHours(date.getHours() + expireHoursTime);
-    return jwt.sign({ email: email, expiration: date }, jwtSecret);
+    return jwt.sign({ email: email, expiration: date }, process.env.JWT_SECRET);
 };
 
 const emailTemplate = ({ userName, link }: { userName: string, link: string }) => `
@@ -29,8 +28,8 @@ const smtpConfig = {
     tls: { rejectUnauthorized: false },
     service: 'gmail',
     auth: {
-        user: mailAccaunt,
-        pass: mailPassword
+        user: process.env.MAIL_ACCAUNT,
+        pass: process.env.MAIL_PASSWORD
     }
 };
 
@@ -60,7 +59,7 @@ const login = (req: Request, res: Response) => {
                 from: '<eco>',
                 to: email,
                 subject: "Invitation",
-                html: emailTemplate({ userName: 'Dear treveler', link: `${host}/account?token=${token}&operation=login` })
+                html: emailTemplate({ userName: 'Dear treveler', link: `${process.env.HOST}/account?token=${token}&operation=login` })
             }
 
             await transporter.sendMail(mailOptionst);

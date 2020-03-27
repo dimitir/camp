@@ -4,7 +4,7 @@ const login = require('./routsFunc/login.ts').login;
 const isAusorized = require('./routsFunc/isAuthorized.ts');
 const passport = require('passport');
 require('./ServerRootDocs/auth.ts');
-const setTokenFront = require('./routsFunc/setTokenFront.ts');
+const firstAuthConnect = require('./routsFunc/firstAuthConnect.ts');
 
 
 
@@ -18,10 +18,6 @@ router.post('/singup', jsonParser, (req: Request, res: Response) => {
 });
 
 
-router.get('/account', (req: Request, res: Response, next: NextFunction) => {
-    isAusorized(req, res, next);
-});
-
 /* 
 router.post('/profile', passport.authenticate('jwt', { session: false }),
     (req: Request, res: Response) => {
@@ -29,11 +25,24 @@ router.post('/profile', passport.authenticate('jwt', { session: false }),
     }
 ); */
 
-router.post('/setTokenFront',
+router.post('/firstconnect', jsonParser,
     (req: Request, res: Response, next: NextFunction) => {
-        setTokenFront(req, res, next)
+        console.log('firstAuthConnect');
+        firstAuthConnect(req, res, next);
     }
 );
 
+
+
+
+
+
+
+
+
+
+router.get('/account', (req: Request, res: Response, next: NextFunction) => {
+    isAusorized(req, res, next);
+});
 
 module.exports = router;
