@@ -5,20 +5,15 @@
         "strict": true,
         "noImplicitReturns": true,
         "noImplicitAny": true,
-        "module": "es6",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "target": "es6",
+        "target": "es5",
         "allowJs": true,
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
-       
     },
     "include": [
-        "./src/**/*", "src/server/ServerRootDocs/envConfig.ts"
+        "./src/**/*",
+        "src/server/env.ts"
     ]
 }
-
-
-
-
-

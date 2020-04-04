@@ -8,7 +8,7 @@ async function fetchEmail(email: string) {
         email: email
     }
     try {
-        const response = await fetch('api/singup', {
+        const response = await fetch('api/auth/singup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'

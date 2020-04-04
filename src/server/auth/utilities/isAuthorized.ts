@@ -1,26 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-const { AuthModel } = require('../ServerRootDocs/ecoFootModel.ts');
 const jwt = require('jsonwebtoken');
 const { generateJwt } = require('./login.ts');
 const createError = require('http-errors');
-/* 
-console.group('generateJwt');
-console.log(generateJwt(jwtSecret, 730)); */
-
-
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const JwtStrategy = require('passport-jwt').Strategy;
-
-const jwtOptions = {
-    secretOrKey: 'hhQqDlk/Hp+8d...', //the same one we used for token generation
-    algorithms: 'HS256', //the same one we used for token generation
-    jwtFromRequest: ExtractJwt.fromUrlQueryParameter('token'), //how we want to extract token from the request
-};
-
-
-
-
-
+const { jwtSecret } = require('../../env.ts');
+const { findUserByEmail, findUserByIdAndUpdate } = require('../../db/user/user.ts');
 
 
 const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
@@ -35,7 +18,7 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 
     let decoded;
     try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
+        decoded = jwt.verify(token, jwtSecret);
     } catch {
         return next(createError(403, 'cennot verify jwt, decoded failed'));
 
@@ -54,16 +37,17 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
     return (async () => {
         let findUser;
         try {
-            findUser = await AuthModel.find({ email: email });
+            findUser = await findUserByEmail(email);
         } catch{
             return next(createError(403, 'failed to find user'));
         }
 
 
         try {
-            const newJwt = generateJwt(process.env.JWT_SECRET, 1460);
+            const newJwt = generateJwt(email, 1460);
             const id = findUser._id;
-            const setData = await AuthModel.findOneAndUpdate(id, { jwt: newJwt, auth: true });
+            const authTrue: boolean = true;
+            const setData = await findUserByIdAndUpdate(id, newJwt, authTrue);
             res.send(setData);
         } catch{
             return next(createError(403, 'Failed to update user'));

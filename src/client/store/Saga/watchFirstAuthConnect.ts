@@ -3,14 +3,12 @@ import jwt from 'jsonwebtoken';
 import actionsList from '../_RootStore/dispatchActionsList';
 
 
-
-
-async function fetchToken(tokenVal: string) {
+async function fetchTest(tokenVal: string) {
     const data = {
         token: tokenVal
     }
     try {
-        const response = await fetch('api/firstconnect', {
+        const response = await fetch('api/auth/profile', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -18,12 +16,31 @@ async function fetchToken(tokenVal: string) {
             body: JSON.stringify(data)
         })
         const dataRespond = await response.json();
-        console.log('dataRespond');
-        console.log(dataRespond);
 
-        /* localStorage.setItem('token', dataRespond.jwt);
-        localStorage.setItem('expectFirstAuth', 'expect'); */
-        // console.log(localStorage.getItem('token'));
+        // localStorage.setItem('token', dataRespond.jwt);
+        console.log(dataRespond.text);
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+async function fetchToken(tokenVal: string) {
+    const data = {
+        token: tokenVal
+    }
+    try {
+        const response = await fetch('api/auth/setRegularToken', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        })
+        const dataRespond = await response.json();
+
+        localStorage.setItem('token', dataRespond.jwt);
+        console.log('dataRespond');
 
     } catch (err) {
         console.error(err);
@@ -32,11 +49,14 @@ async function fetchToken(tokenVal: string) {
 
 
 export default function* watchFirstAuthConnect() {
-    console.log('jjj');
+    console.log('watchFirstAuthConnect');
     const token = localStorage.getItem('token');
-    console.log(token);
-    const user = yield call(fetchToken, (token as string));
-    
+    const expectFirstAuth = localStorage.getItem('expectFirstAuth');
+    console.log(expectFirstAuth);
+    const test = yield call(fetchTest, (token as string));
+
+    localStorage.removeItem('expectFirstAuth');
+
     if (localStorage.getItem('expectFirstAuth') && localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
 
@@ -55,6 +75,7 @@ export default function* watchFirstAuthConnect() {
             else {
                 console.log('DO fetch');
                 const user = yield call(fetchToken, (token as string));
+                const test = yield call(fetchTest, (token as string));
             }
 
 

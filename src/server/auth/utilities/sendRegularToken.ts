@@ -1,9 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
-const { AuthModel } = require('../ServerRootDocs/ecoFootModel.ts');
+const { jwtSecret } = require('../../env.ts');
+const { findUserByEmail } = require('../../db/user/user.ts');
 
-const firstAuthConnect = (req: Request, res: Response, next: NextFunction) => {
+console.log(jwtSecret);
+
+
+const sendRegularToken = (req: Request, res: Response, next: NextFunction) => {
     console.log('Gofo');
     const token = req.body.token;
     console.log(token);
@@ -11,14 +15,14 @@ const firstAuthConnect = (req: Request, res: Response, next: NextFunction) => {
         next(createError(400, 'Have not the token'))
     }
     else {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, jwtSecret);
         console.log(decoded);
         const email = decoded.email;
         console.log('set email  ' + email);
 
         (async () => {
             try {
-                const user = await AuthModel.findOne({ email: email });
+                const user = await findUserByEmail(email)
                 console.group('user');
                 console.log(user);
                 res.send({ jwt: user.jwt });
@@ -33,4 +37,4 @@ const firstAuthConnect = (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-module.exports = firstAuthConnect;
+module.exports = sendRegularToken;
