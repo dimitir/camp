@@ -1,16 +1,13 @@
-import routsApp, {dopo} from './routs/routs';
-const express = require('express');
-// export { };
-const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-const { portEnv, dbConnectionString } = require('./env.ts');
-// const routsApp = require('./routs/routs.ts');
-const app = express();
-console.log(dopo);
-console.log('auth');
-console.log(routsApp);
+import express from 'express';
+import mongoose from 'mongoose';
+import bluebird from 'bluebird';
+mongoose.Promise = bluebird;
+import { port, dbConnectionString } from './env';
+import { initialiseAuthentication } from './auth/auth';
+import routsApp from './routs/routs';
 
-const port = portEnv || 8090;
+const app = express();
+
 const startServer = () => {
     console.log(port);
     app.listen(port, () => console.log(`App started on port ${port}`));
@@ -19,19 +16,19 @@ const startServer = () => {
 const connectDb = () => {
     console.log('connect db');
     const options = { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false };
-    mongoose.connect(dbConnectionString, options)
+    mongoose.connect((dbConnectionString as string), options)
     return mongoose.connection
 }
+
 
 connectDb()
     .on('error', console.log)
     .on('disconnected', connectDb)
     .once('open', startServer);
 
+initialiseAuthentication(app);
+routsApp(app);
 
-
-
-// routsApp(app);
 // app.use('/api', routsApp);
 
 

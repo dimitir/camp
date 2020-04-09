@@ -8,5 +8,18 @@ export interface IUser extends Document {
     email: String;
     jwt: String;
     auth: Boolean;
-    providers: [Iproviders];
+    providers: [{
+        provider: String,
+    providerId: String
+    }];
+}
+
+
+export interface TypeCreateUserProvider {
+    email: string,
+    provider: string,
+    providerId: string,
+    firstName: string,
+    lastName: string,
+    displayName: string,
 }

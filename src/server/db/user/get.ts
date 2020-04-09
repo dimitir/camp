@@ -1,17 +1,26 @@
-export { };
 const { UserModel } = require('../schema.ts');
 
-const findUserByEmail = async (userEmail: string) => {
-    await UserModel.find({ email: userEmail })
+const getUserByEmail = async (userEmail: string) => {
+    return await UserModel.findOne({ email: userEmail })
 };
 
 
-const findUserByIdAndUpdate = async (id: string, newJwt: string, authTrue: boolean) => {
-    await UserModel.findOneAndUpdate(id, { jwt: newJwt, auth: authTrue });
+const getUserByIdAndUpdate = async (id: string, newJwt: string, authTrue: boolean) => {
+    console.log('findUserByIdAndUpdate');
+    console.log(id, newJwt, authTrue);
+    const userData = await UserModel.findOneAndUpdate({ _id: id }, { jwt: newJwt, auth: authTrue });
+    console.log('userData');
+    console.log(userData);
+    return userData;
 }
 
+const getUserByProviderId = async (id: string) => {
+    console.log('getUserByProviderId');
+    return await UserModel.findOne({ providerId: id })
+}
 
-module.exports = {
-    findUserByEmail,
-    findUserByIdAndUpdate
+export {
+    getUserByEmail,
+    getUserByIdAndUpdate,
+    getUserByProviderId
 }

@@ -121,7 +121,7 @@ module.exports = (env, argv) => {
       port: 3000,
       open: true,
       proxy: {
-        '/api': 'http://localhost:8090'
+        '/api': 'http://localhost:8080'
       }
     },
     node: { fs: 'empty' },

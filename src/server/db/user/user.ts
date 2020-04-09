@@ -1,9 +1,10 @@
-export { };
-const { createUser } = require('./create.ts');
-const { findUserByEmail, findUserByIdAndUpdate } = require('./get.ts');
+import { createUser, createUserProvider } from './create';
+import { getUserByEmail, getUserByIdAndUpdate, getUserByProviderId } from './get';
 
-module.exports = {
+export {
     createUser,
-    findUserByEmail,
-    findUserByIdAndUpdate,
+    createUserProvider,
+    getUserByEmail,
+    getUserByIdAndUpdate,
+    getUserByProviderId,
 }

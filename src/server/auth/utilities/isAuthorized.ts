@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-const jwt = require('jsonwebtoken');
-const { generateJwt } = require('./login.ts');
-const createError = require('http-errors');
-const { jwtSecret } = require('../../env.ts');
-const { findUserByEmail, findUserByIdAndUpdate } = require('../../db/user/user.ts');
-
+import jwt from 'jsonwebtoken';
+import { generateJwt } from './login';
+import createError from 'http-errors';
+import { jwtSecret } from '../../env';
+import { getUserByEmail, getUserByIdAndUpdate } from '../../db/user/user';
+import { IUser } from '../../db/Types';
 
 const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 
@@ -17,12 +17,8 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 
 
     let decoded;
-    try {
-        decoded = jwt.verify(token, jwtSecret);
-    } catch {
-        return next(createError(403, 'cennot verify jwt, decoded failed'));
-
-    }
+    try { decoded = jwt.verify(token, (jwtSecret as string)); }
+    catch { return next(createError(403, 'cennot verify jwt, decoded failed')); }
 
     if (!decoded.hasOwnProperty('email') || !decoded.hasOwnProperty('expiration')) {
         return next(createError(403, 'invalid jwt token'));
@@ -35,20 +31,31 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
     }
 
     return (async () => {
-        let findUser;
+        let findUser: IUser;
         try {
-            findUser = await findUserByEmail(email);
+            findUser = await getUserByEmail(email);
+            console.log('findUser');
+            console.log(findUser );
+            console.log(findUser._id );
+
+
         } catch{
             return next(createError(403, 'failed to find user'));
         }
 
 
         try {
+            // 1460 hours it is 60 days
             const newJwt = generateJwt(email, 1460);
+           /*  console.log(findUser);
+            console.log('findUser'); */
             const id = findUser._id;
             const authTrue: boolean = true;
-            const setData = await findUserByIdAndUpdate(id, newJwt, authTrue);
+            const setData = await getUserByIdAndUpdate(id, newJwt, authTrue);
+            console.log('setData');
+            console.log(setData);
             res.send(setData);
+
         } catch{
             return next(createError(403, 'Failed to update user'));
         }
@@ -58,4 +65,4 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-module.exports = isAuthorized;
+export { isAuthorized };

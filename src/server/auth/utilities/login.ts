@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-const jwt = require('jsonwebtoken');
-const nodemailer = require("nodemailer");
-const HttpStatus = require('http-status-codes');
-const { jwtSecret, host, mailPassport, mailAccaunt } = require('../../env.ts');
-const createError = require('http-errors');
-const { createUser } = require('../../db/user/user.ts');
+import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+import HttpStatus from 'http-status-codes';
+import { jwtSecret, host, mailPassport, mailAccaunt } from '../../env';
+import createError from 'http-errors';
+import { createUser, getUserByEmail } from '../../db/user/user';
 
 
 const generateJwt = (email: string, expireHoursTime: number) => {
     const date = new Date();
     date.setHours(date.getHours() + expireHoursTime);
-    return jwt.sign({ email: email, expiration: date }, jwtSecret);
+    return jwt.sign({ email: email, expiration: date }, (jwtSecret as string));
 };
 
 const emailTemplate = ({ userName, link }: { userName: string, link: string }) => `
@@ -45,6 +45,8 @@ transporter.verify(function (error: any, success: any) {
 
 
 const login = (req: Request, res: Response, next: NextFunction) => {
+
+
     const { email } = req.body;
 
     console.log(email);
@@ -70,21 +72,27 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         } catch{
             return next(createError(403, 'Mail is not send'))
         }
-        let user;
-        try {
-            user = await createUser(email, token);
-        } catch {
-            return next(createError(403, 'User in not create'))
-        }
 
-        return await res.status(HttpStatus.OK).json({ jwt: user.jwt });
+        //  add remove user when his sing out!!!, or overtime is heppen
+        /*     try {
+                const user = await getUserByEmail(email);
+                if (user) { return next(createError(403, 'Email in already use')) }
+            } catch (error) {
+                return next(createError(403, 'User in not check'))
+            }
+     */
+
+        try { const newUser = await createUser(token, email); }
+        catch { return next(createError(403, 'User in not create')) }
+
+
+        try { return await res.status(HttpStatus.OK).json({ jwt: token }); }
+        catch (e) { return next(createError(403, 'Bed request')) }
+
 
     })()
 }
 
 
-module.exports = {
-    generateJwt,
-    login
-}
+export { generateJwt, login };
 

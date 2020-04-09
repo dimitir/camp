@@ -35,8 +35,8 @@ const ModalSingUpAll: React.FC<PropsTypesModalSingAll> = ({ open, handleClose, h
                         <p id="transition-modal-description" className={style.descriptionTitle} >react-transition-group animates me.</p>
                         <Button variant="outlined" color="primary"
                             className={style.buttonLink}>
-                            Sign up with Google
-                  </Button>
+                            <a href={`${process.env.HOST_SERVER}/auth/google`}>Sign up with Google</a>
+                        </Button>
                         <Button variant="outlined" disableRipple color="primary"
                             className={style.buttonLink}>
                             Sign up with Facebook
@@ -46,6 +46,7 @@ const ModalSingUpAll: React.FC<PropsTypesModalSingAll> = ({ open, handleClose, h
                             className={style.buttonLink}>
                             Sign up with email
                   </Button>
+
                         <p className={style.questionSingIn}>Already have an account?
                         <Link
                                 onClick={() => handleShowModal(modalNamesList.SING_IN_ALL_NAME_MODAL)}

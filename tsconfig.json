@@ -11,9 +11,10 @@
         "allowJs": true,
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true
     },
     "include": [
         "./src/**/*",
         "src/server/env.ts"
-    ]
+    ],
 }

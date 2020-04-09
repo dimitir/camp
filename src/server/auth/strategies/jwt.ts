@@ -1,9 +1,8 @@
-const passport = require('passport');
-const passportJWT = require("passport-jwt");
-const { jwtSecret } = require('../../env');
-const findUserByEmail = require('../../db/user/user');
-const ExtractJwt = passportJWT.ExtractJwt;
-export { }
+import passport from 'passport';
+import passportJWT from "passport-jwt";
+import { jwtSecret } from '../../env';
+import { getUserByEmail } from '../../db/user/user';
+import ExtractJwt = passportJWT.ExtractJwt;
 const JWTStrategy = passportJWT.Strategy;
 
 console.log('l;lj;slfas;lkfj;slkjf;aslfkjs;l');
@@ -17,17 +16,25 @@ const strategy = () => {
 
     passport.use(new JWTStrategy(jwtOptions,
         (jwtPayload: any, done: any) => {
-            console.log(jwtPayload);
-            const email = jwtPayload.email;
+            console.log('jwtPayload');
+            let email;
+           /*  if (!jwtPayload.email) {
+                email = 'emailIsNull';
+            }
+            else {
+            } */
+            email = jwtPayload.email;
             return (async () => {
                 try {
                     console.log('kkk');
-                    const user = await findUserByEmail(email);
+                    console.log(email);
+                    const user = await getUserByEmail(email);
                     console.log(user);
                     if (user) {
                         console.log('user had');
                         return done(null, user);
                     }
+                    console.log('nema !');
                     return done(null, false);
                 }
                 catch (err) {
@@ -40,4 +47,4 @@ const strategy = () => {
 
 }
 
-module.exports = strategy;
+export default strategy;

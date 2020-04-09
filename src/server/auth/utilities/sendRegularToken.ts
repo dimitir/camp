@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-const createError = require('http-errors');
-const jwt = require('jsonwebtoken');
-const { jwtSecret } = require('../../env.ts');
-const { findUserByEmail } = require('../../db/user/user.ts');
-
+import createError from 'http-errors';
+import jwt from 'jsonwebtoken';
+import { jwtSecret } from '../../env';
+import { getUserByEmail } from '../../db/user/user';
+import { IUser } from '../../db/Types';
 console.log(jwtSecret);
 
 
@@ -15,16 +15,18 @@ const sendRegularToken = (req: Request, res: Response, next: NextFunction) => {
         next(createError(400, 'Have not the token'))
     }
     else {
-        const decoded = jwt.verify(token, jwtSecret);
+        const decoded: any = jwt.verify(token, (jwtSecret as string));
         console.log(decoded);
         const email = decoded.email;
         console.log('set email  ' + email);
 
         (async () => {
             try {
-                const user = await findUserByEmail(email)
+                const user: IUser = await getUserByEmail(email)
                 console.group('user');
+                console.log(typeof user);
                 console.log(user);
+                // const userJwt = user['0'].jwt;
                 res.send({ jwt: user.jwt });
             }
             catch{
@@ -37,4 +39,4 @@ const sendRegularToken = (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-module.exports = sendRegularToken;
+export { sendRegularToken };

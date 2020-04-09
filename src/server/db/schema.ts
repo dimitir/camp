@@ -1,28 +1,20 @@
-const mongoose = require("mongoose");
-import { Schema } from 'mongoose';
-import { IUser } from './Types';
+import mongoose from 'mongoose';
 
-
-const subSchema: Schema = mongoose.Schema({
-    _id: false,
+const subSchema = new mongoose.Schema({
     provider: String,
     providerId: String
-});
+}, { _id: false });
 
 
-const User: IUser = mongoose.Schema({
+const User = new mongoose.Schema({
     jwt: String,
     email: String,
     auth: Boolean,
-    providers: [subSchema]
+    provider: String,
+    providerId: String,
+    firstName: String,
+    lastName: String,
+    displayName: String,
 });
 
-module.exports.UserModel = mongoose.model("ecoAuths", User);
-
-
-
-/*
-var subSchema = mongoose.Schema({
-    provider: String,
-    id: String
-}, { _id: false }); */
+export const UserModel = mongoose.model("ecoUsers", User);
