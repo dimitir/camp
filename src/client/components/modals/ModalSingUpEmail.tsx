@@ -67,7 +67,7 @@ const ModalSingUpAll: React.FC<PropsTypesModalSingEmail> = ({ open, handleClose,
                         </Button>
 
                         <Link href="#" className={style.linkToSingUpAll} color="inherit"
-                            onClick={() => handleShowModal(modalNamesList.SING_UP_ALL_NAME_MODAL)}>
+                            onClick={() => handleShowModal(modalNamesList.SING_UP_ALL)}>
                             <NavigateBeforeIcon fontSize="small" className={style.iconArrowLeft} />All sing up options
                         </Link>
                     </div>

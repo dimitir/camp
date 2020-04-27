@@ -1,17 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import HttpStatus from 'http-status-codes';
-import { jwtSecret, host, mailPassport, mailAccaunt } from '../../env';
+import env from '../../../env';
 import createError from 'http-errors';
-import { createUser, getUserByEmail } from '../../db/user/user';
+import { createUser, getUserByEmail } from '../../db/user';
+import generateJwt, { generateMailJwt } from './_generateJwt';
 
 
-const generateJwt = (email: string, expireHoursTime: number) => {
-    const date = new Date();
-    date.setHours(date.getHours() + expireHoursTime);
-    return jwt.sign({ email: email, expiration: date }, (jwtSecret as string));
-};
 
 const emailTemplate = ({ userName, link }: { userName: string, link: string }) => `
     <h2>Eco Foot</h2>
@@ -28,8 +23,8 @@ const smtpConfig = {
     tls: { rejectUnauthorized: false },
     service: 'gmail',
     auth: {
-        user: mailAccaunt,
-        pass: mailPassport
+        user: env.mailAccaunt,
+        pass: env.mailPassport
     }
 };
 
@@ -47,24 +42,20 @@ transporter.verify(function (error: any, success: any) {
 const login = (req: Request, res: Response, next: NextFunction) => {
 
 
-    const { email } = req.body;
+    const { email, lastLocation } = req.body;
 
-    console.log(email);
-    console.log('email');
-
-    if (!email) {
-        return next(createError(400, 'Email is required'));
+    if (!email && !lastLocation) {
+        return next(createError(400, 'Email and lastLocation is required'));
     }
 
 
     return (async () => {
-
-        const token = generateJwt(email, 2);
+        const token = generateMailJwt(email, lastLocation, 2);
         const mailOptionst = {
             from: '<eco>',
             to: email,
             subject: "Invitation",
-            html: emailTemplate({ userName: 'Dear treveler', link: `${host}/auth/account?token=${token}&operation=login` })
+            html: emailTemplate({ userName: 'Dear treveler', link: `${env.host}/auth/account?auth=Bearer_${token}` })
         };
 
         try {
@@ -93,6 +84,5 @@ const login = (req: Request, res: Response, next: NextFunction) => {
     })()
 }
 
-
-export { generateJwt, login };
+export default login;
 

@@ -1,5 +1,5 @@
 import { UserModel } from '../schema';
-import {TypeCreateUserProvider} from '../Types';
+import { TypeCreateUserProvider } from '../Types';
 
 const createUser = async (
     token: string,
@@ -15,35 +15,44 @@ const createUser = async (
 }
 
 
- 
 
-const createUserProvider = async ({
+
+const createUserFromProvider = async ({
+    jwt,
     email,
     provider,
     providerId,
     firstName,
     lastName,
-    displayName, }: TypeCreateUserProvider
+    displayName,
+    picture,
+    locale
+}: TypeCreateUserProvider
 ) => {
 
     console.log(displayName);
     console.log('displayName');
 
     const userAuthData = {
+        jwt,
         email: email,
-        auth: false,
-        provider: provider,
-        providerId: providerId,
-        firstName: firstName,
-        lastName: lastName,
-        displayName: displayName,
+        auth: true,
+        provider,
+        providerId,
+        firstName,
+        lastName,
+        displayName,
+        picture,
+        locale
     };
     const authFirst = await UserModel.create(userAuthData);
-    return await authFirst.save();
+    const user = await authFirst.save();
+    console.log('user');
+    console.log(user);
+    return user;
 }
-
 
 export {
     createUser,
-    createUserProvider
+    createUserFromProvider  
 }

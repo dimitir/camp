@@ -29,7 +29,6 @@ const ModalSingUpAll: React.FC<PropsTypesModalSingEmail> = ({ open, handleClose,
 
 
     const onSubmit = handleSubmit(({ email }) => {
-        console.log(email);
         handleSendEmail(email);
         reset();
     });
@@ -45,35 +44,35 @@ const ModalSingUpAll: React.FC<PropsTypesModalSingEmail> = ({ open, handleClose,
                 BackdropComponent={Backdrop}
                 disableAutoFocus={true}
                 disableEnforceFocus={true}
-                    >
-                    <Fade in={open}>
-                        <div className={style.paper}>
-                            <h2 id="transition-modal-title">Sting in with Email</h2>
-                            <p id="transition-modal-description" className={style.descriptionTitle} >
-                                Enter your email adress to create an account
+            >
+                <Fade in={open}>
+                    <div className={style.paper}>
+                        <h2 id="transition-modal-title">Sting in with Email</h2>
+                        <p id="transition-modal-description" className={style.descriptionTitle} >
+                            Enter your email adress to create an account
                         </p>
 
-                            <form noValidate autoComplete="off" onSubmit={onSubmit} >
-                                <TextField
-                                    name='email'
-                                    inputRef={register({ required: true })}
-                                    id="standard-basic" label="email"
-                                />   {errors.email && <p>{(errors.email as any)?.message}</p>}
-                            </form>
-                            <Button variant="outlined"
-                                onClick={onSubmit}
-                                color="primary"
-                                className={style.buttonContinue}>
-                                Continue
+                        <form noValidate autoComplete="off" onSubmit={onSubmit} >
+                            <TextField
+                                name='email'
+                                inputRef={register({ required: true })}
+                                id="standard-basic" label="email"
+                            />   {errors.email && <p>{(errors.email as any)?.message}</p>}
+                        </form>
+                        <Button variant="outlined"
+                            onClick={onSubmit}
+                            color="primary"
+                            className={style.buttonContinue}>
+                            Continue
                         </Button>
 
-                            <Link href="#" className={style.linkToSingUpAll} color="inherit"
-                                onClick={() => handleShowModal(modalNamesList.SING_IN_ALL_NAME_MODAL)}>
-                                <NavigateBeforeIcon fontSize="small" className={style.iconArrowLeft} />All sing in options
+                        <Link href="#" className={style.linkToSingUpAll} color="inherit"
+                            onClick={() => handleShowModal(modalNamesList.SING_IN_ALL)}>
+                            <NavigateBeforeIcon fontSize="small" className={style.iconArrowLeft} />All sing in options
                         </Link>
-                        </div>
+                    </div>
 
-                    </Fade>
+                </Fade>
             </Modal>
 
         </>

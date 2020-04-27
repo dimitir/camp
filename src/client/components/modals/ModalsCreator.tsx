@@ -11,7 +11,7 @@ import ModalSingInEmail from './ModalSingInEmail';
 const TransitionsModal: React.FC<PropsTypes_Modal> = ({ open, handleClose, handleSendEmail, typeModal, handleShowModal }: PropsTypes_Modal) => {
   console.log(typeModal);
   switch (typeModal) {
-    case modalsName.SING_UP_ALL_NAME_MODAL:
+    case modalsName.SING_UP_ALL:
       return (
         <>
           <ModalSingUpAll
@@ -21,7 +21,7 @@ const TransitionsModal: React.FC<PropsTypes_Modal> = ({ open, handleClose, handl
           />
         </>
       );
-    case modalsName.SING_UP_EMAIL_NAME_MODAL:
+    case modalsName.SING_UP_EMAIL:
       return (
         <ModalSingUpEmail
           open={open}
@@ -30,15 +30,26 @@ const TransitionsModal: React.FC<PropsTypes_Modal> = ({ open, handleClose, handl
           handleSendEmail={handleSendEmail}
         />
       )
-    case modalsName.SING_IN_ALL_NAME_MODAL:
+    case modalsName.SING_IN_ALL:
       return (
         <ModalSingInAll
           open={open}
           handleClose={handleClose}
           handleShowModal={handleShowModal}
+
         />
       )
-    case modalsName.SING_IN_EMAIL_NAME_MODAL:
+    case modalsName.SING_IN_EMAIL:
+      return (
+        <ModalSingInEmail
+          open={open}
+          handleClose={handleClose}
+          handleShowModal={handleShowModal}
+          handleSendEmail={handleSendEmail}
+        />
+      )
+
+    case modalsName.SING_IN_EMAIL:
       return (
         <ModalSingInEmail
           open={open}
@@ -56,3 +67,7 @@ const TransitionsModal: React.FC<PropsTypes_Modal> = ({ open, handleClose, handl
 }
 
 export default TransitionsModal;
+
+
+/* Check your inbox
+We just emailed a magic link to ecologyfoot@gmail.com. Click the link to complete your account set-up. */

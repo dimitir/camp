@@ -12,6 +12,10 @@ export interface InitialStateModals {
     typeModal: string;
 }
 
+export interface InitialStateUser {
+    user: any
+}
+
 export interface CloseModalType {
     type: string
 }
@@ -23,9 +27,25 @@ export interface TypeSendEmail {
 }
 
 
+
+
+export interface TypeSendCodeGoogleAuth {
+    type: string;
+    code: string;
+}
+
+
 const initialState = {
     showModal: false,
     typeModal: ''
 }
 
-// export interface ActionType extends ActionTypeUseId, ActionTypeMake, ActionTypeInitial { };
+
+
+export interface TypeSetUserData {
+    type: string;
+    user: any;
+}
+
+export interface ActionTypeAuth extends TypeSetUserData, TypeSendEmail { };
+

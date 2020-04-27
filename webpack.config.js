@@ -118,13 +118,21 @@ module.exports = (env, argv) => {
       extensions: ['*', '.js', '.jsx', '.tsx', '.ts', '.css', '.scss']
     },
     devServer: {
+      historyApiFallback: true,
+      /* contentBase: './', */
+      /* hot: true, */
       port: 3000,
       open: true,
-      proxy: {
-        '/api': 'http://localhost:8080'
-      }
+      proxy: { '/api/**': { target: 'http://localhost:8090', secure: false, changeOrigin: true, } },
+
     },
     node: { fs: 'empty' },
+   /*  node: {
+      child_process: 'empty',
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty'
+    }, */
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
@@ -142,3 +150,19 @@ module.exports = (env, argv) => {
 
 
 // "process.env.JWT_SECRET": JSON.stringify("aCoolValue")
+
+// proxy:{ '/api/**': { target: 'http://localhost:4001', secure: false } }
+
+/* {
+          target: 'http://localhost:8090',
+          secure: false,
+          changeOrigin: true,
+          headers: {
+            Connection: 'keep-alive'
+          },
+        } */
+
+
+/*  proxy: {
+'/api': 'http://localhost:8090',
+}, */

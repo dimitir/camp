@@ -1,16 +1,19 @@
-import { take, call } from 'redux-saga/effects';
+import { take, call, put } from 'redux-saga/effects';
+import actionsList from '../../_RootStore/dispatchActionsList';
 
-import actionsList from '../_RootStore/dispatchActionsList';
 
 async function fetchEmail(email: string) {
+    const lastLocation = localStorage.getItem('lastLocation');
+
     const data = {
-        email: email
+        email: email,
+        lastLocation: lastLocation,
     }
 
     let response, dataRespond, text;
 
     try {
-        response = await fetch('api/auth/singup', {
+        response = await fetch('api/auth/loginEmail', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -42,12 +45,11 @@ export default function* watchUserSendEmail() {
 
     while (true) {
         try {
-            const { email } = yield take(actionsList.SING_UP_SEND_EMAIL)
+            const { email } = yield take(actionsList.LOGIN_SEND_EMAIL);
             const user = yield call(fetchEmail, email);
         }
         catch (err) {
             console.error(err);
         }
     }
-
 }

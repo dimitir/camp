@@ -24,32 +24,32 @@ const ModalSingInAll: React.FC<PropsTypesModalSingAll> = ({ open, handleClose, h
                 BackdropComponent={Backdrop}
                 disableAutoFocus={true}
                 disableEnforceFocus={true}
-                    >
-                    <Fade in={open}>
-                        <div className={style.paper}>
-                            <h2 id="transition-modal-title">Glad to see you</h2>
-                            <p id="transition-modal-description" className={style.descriptionTitle} >react-transition-group animates me.</p>
-                            <Button variant="outlined" color="primary"
-                                className={style.buttonLink}>
-                                Sign in with Google
+            >
+                <Fade in={open}>
+                    <div className={style.paper}>
+                        <h2 id="transition-modal-title">Glad to see you</h2>
+                        <p id="transition-modal-description" className={style.descriptionTitle} >react-transition-group animates me.</p>
+                        <Button variant="outlined" color="primary"
+                            className={style.buttonLink}>
+                            Sign in with Google
                   </Button>
-                            <Button variant="outlined" disableRipple color="primary"
-                                className={style.buttonLink}>
-                                Sign in with Facebook
+                        <Button variant="outlined" color="primary"
+                            className={style.buttonLink}>
+                            Sign in with Facebook
                   </Button>
-                            <Button variant="text" color="primary"
-                                onClick={() => handleShowModal(modalNamesList.SING_IN_EMAIL_NAME_MODAL)}
-                                className={style.buttonLink}>
-                                Sign in with email
+                        <Button variant="outlined" color="primary"
+                            onClick={() => handleShowModal(modalNamesList.SING_IN_EMAIL)}
+                            className={style.buttonLink}>
+                            Sign in with email
                   </Button>
-                            <p className={style.questionSingIn}>No account?
+                        <p className={style.questionSingIn}>No account?
                         <Link
-                                    onClick={() => handleShowModal(modalNamesList.SING_UP_ALL_NAME_MODAL)}
-                                    href="#" className={style.linkToSing}>
-                                    Create one
+                                onClick={() => handleShowModal(modalNamesList.SING_UP_ALL)}
+                                href="#" className={style.linkToSing}>
+                                Create one
                         </Link> </p>
-                        </div>
-                    </Fade>
+                    </div>
+                </Fade>
             </Modal>
 
         </>

@@ -1,6 +1,6 @@
-import { take, call } from 'redux-saga/effects';
+import { take, call, put } from 'redux-saga/effects';
 import jwt from 'jsonwebtoken';
-import actionsList from '../_RootStore/dispatchActionsList';
+import actionsList from '../../_RootStore/dispatchActionsList';
 
 async function fetchTest(tokenVal: string) {
     console.log('tokenVal');
@@ -34,7 +34,7 @@ async function fetchToken(tokenVal: string) {
         token: tokenVal
     }
     try {
-        const response = await fetch('api/auth/setRegularToken', {
+        const response = await fetch('api/auth/emailWayFinish', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -43,25 +43,23 @@ async function fetchToken(tokenVal: string) {
         })
 
         const dataRespond = await response.json();
-
-        console.group('dataRespond');
-        console.group(dataRespond);
-
         localStorage.setItem('token', dataRespond.jwt);
         localStorage.removeItem('expectFirstAuth');
+        return dataRespond
+
 
     } catch (err) {
         console.error(err);
     }
+    return null;
 }
 
 
 
 
-const isExpectedAuth = (markLocalExpected: string) => {
-    if (!localStorage.getItem(markLocalExpected)) {
-        console.log('keke');
-        console.log(localStorage.getItem(markLocalExpected));
+const isExpectedAuth = () => {
+    if (localStorage.getItem('expectFirstAuth')) {
+        console.log(localStorage.getItem('expectFirstAuth'));
         return true
     }
     else return false;
@@ -70,9 +68,7 @@ const isExpectedAuth = (markLocalExpected: string) => {
 const isNoExpired = () => {
     const token = localStorage.getItem('token');
     console.log('isNoExpired');
-    console.log(token);
     if (!jwt.decode((token as string))) {
-        console.log('ret');
         return false
     }
     const decoded = jwt.verify((token as string), (process.env.JWT_SECRET as string));
@@ -80,7 +76,6 @@ const isNoExpired = () => {
     const expirationFormat = new Date(expiration);
 
     if (expirationFormat < new Date()) {
-
         console.log('expiration is overtime');
         localStorage.removeItem('expectFirstAuth');
         return false;
@@ -88,29 +83,27 @@ const isNoExpired = () => {
     else return true;
 }
 
+
+
+
+
 export default function* watchFirstAuthConnect() {
     console.log('watchFirstAuthConnect');
     localStorage.setItem('expectFirstAuth', 'expectFirstAuth');
-
-    // const expectFirstAuth = localStorage.setItem('expectFirstAuth', 'expectFirstAuth');
-
     const token = localStorage.getItem('token');
-    console.log(token);
 
 
     const test = yield call(fetchTest, (token as string));
 
-    if (isExpectedAuth('expectFirstAuth') && isNoExpired()) {
-        console.log('kjlk');
+    if (isNoExpired() && isExpectedAuth()) {
         try {
-            console.log('DO fetch');
             const user = yield call(fetchToken, (localStorage.getItem('token') as string));
+            yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
         } catch {
             throw new SyntaxError("fatch token to server error");
         }
     }
 }
-
 
 // add check when token is undefined;
 // add remuve email, user in db

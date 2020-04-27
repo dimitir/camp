@@ -8,7 +8,7 @@ const environment = {
 
     port: (process.env.PORT as string),
     host: (process.env.HOST as string),
-    hostServer: (process.env.HOST_SERVER as string),
+    hostFront: (process.env.HOST_FRONT as string),
 
     baseApiUrl: (process.env.BASE_API_URL as string),
     dbConnectionString: (process.env.DB_CONNECTION_STRING as string),

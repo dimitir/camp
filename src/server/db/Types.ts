@@ -4,22 +4,30 @@ interface Iproviders {
     provider: String,
     providerId: String
 }
+
+/* 
 export interface IUser extends Document {
-    email: String;
-    jwt: String;
-    auth: Boolean;
+    email: string;
+    jwt: string;
+    auth: boolean;
     providers: [{
-        provider: String,
-    providerId: String
+        provider: string,
+        providerId: string,
+        firstName: string,
+        lastName: string,
+        displayName: string,
     }];
-}
+} */
 
 
 export interface TypeCreateUserProvider {
-    email: string,
-    provider: string,
-    providerId: string,
-    firstName: string,
-    lastName: string,
-    displayName: string,
+    jwt: string;
+    email: string;
+    provider: string;
+    providerId: string;
+    firstName: string;
+    lastName: string;
+    displayName: string;
+    picture: string;
+    locale?: string;
 }

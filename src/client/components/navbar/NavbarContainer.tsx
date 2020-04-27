@@ -3,16 +3,20 @@ import { Dispatch } from 'redux';
 
 import Navbar from './Navbar';
 import { showModal } from '../../store/modals/actions';
-import modalName from '../../store/modals/modalNamesList';
+import { RootStateType } from '../../store/_RootStore/rootReducers';
 
 
 
-const MatDispatchProps = (dispatch: Dispatch) => ({
-    openModal: (name: string) => dispatch(showModal(name))
+const MapStateToProps = (state: RootStateType) => ({
+    user: state.user.user
 })
 
+const MapDispatchToProps = (dispatch: Dispatch) => ({
+    openModal: (name: string) => dispatch(showModal(name))
+});
 
-const connector = connect(null, MatDispatchProps);
+
+const connector = connect(MapStateToProps, MapDispatchToProps);
 
 
 export type PropTypes_Navbar = ConnectedProps<typeof connector>;

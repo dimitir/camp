@@ -1,15 +1,18 @@
 import { combineReducers } from 'redux';
 import modalsReducer from '../modals/reducer';
-  import { InitialStateModals } from './types';
+import authUserReducer from '../auth/reducer';
+import { InitialStateModals, InitialStateUser } from './types';
 
 
 const rootReducer = combineReducers({
-    modal: modalsReducer,
+  modal: modalsReducer,
+  user: authUserReducer
 });
 
- 
+
 export interface RootStateType {
-    modal: InitialStateModals
-}  
+  modal: InitialStateModals;
+  user: InitialStateUser
+}
 
 export default rootReducer;
