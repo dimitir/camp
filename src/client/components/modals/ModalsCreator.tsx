@@ -5,11 +5,11 @@ import ModalSingUpAll from './ModalSingUpAll';
 import ModalSingUpEmail from './ModalSingUpEmail';
 import ModalSingInAll from './ModalSingInAll';
 import ModalSingInEmail from './ModalSingInEmail';
+import ModalCheckYouInbox from './ModalCheckYouInbox';
 
 
 
 const TransitionsModal: React.FC<PropsTypes_Modal> = ({ open, handleClose, handleSendEmail, typeModal, handleShowModal }: PropsTypes_Modal) => {
-  console.log(typeModal);
   switch (typeModal) {
     case modalsName.SING_UP_ALL:
       return (
@@ -49,13 +49,11 @@ const TransitionsModal: React.FC<PropsTypes_Modal> = ({ open, handleClose, handl
         />
       )
 
-    case modalsName.SING_IN_EMAIL:
+    case modalsName.CHECK_YOU_INBOX:
       return (
-        <ModalSingInEmail
+        <ModalCheckYouInbox
           open={open}
           handleClose={handleClose}
-          handleShowModal={handleShowModal}
-          handleSendEmail={handleSendEmail}
         />
       )
     default: return (

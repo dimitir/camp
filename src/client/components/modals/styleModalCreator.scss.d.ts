@@ -3,6 +3,7 @@
 interface CssExports {
   'buttonContinue': string;
   'buttonLink': string;
+  'buttonLinkSpan': string;
   'descriptionTitle': string;
   'iconArrowLeft': string;
   'linkToSing': string;
@@ -11,6 +12,7 @@ interface CssExports {
   'modalBackground': string;
   'paper': string;
   'questionSingIn': string;
+  'textButton': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

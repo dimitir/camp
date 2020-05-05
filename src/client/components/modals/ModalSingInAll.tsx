@@ -4,10 +4,11 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-
+import Typography from '@material-ui/core/Typography';
 import { PropsTypesModalSingAll } from './ContainerModalsCreator';
 import style from './styleModalCreator.scss';
 import modalNamesList from '../../store/modals/modalNamesList';
+import SingAll from './_SingAll';
 
 
 const ModalSingInAll: React.FC<PropsTypesModalSingAll> = ({ open, handleClose, handleShowModal }: PropsTypesModalSingAll) => {
@@ -29,19 +30,7 @@ const ModalSingInAll: React.FC<PropsTypesModalSingAll> = ({ open, handleClose, h
                     <div className={style.paper}>
                         <h2 id="transition-modal-title">Glad to see you</h2>
                         <p id="transition-modal-description" className={style.descriptionTitle} >react-transition-group animates me.</p>
-                        <Button variant="outlined" color="primary"
-                            className={style.buttonLink}>
-                            Sign in with Google
-                  </Button>
-                        <Button variant="outlined" color="primary"
-                            className={style.buttonLink}>
-                            Sign in with Facebook
-                  </Button>
-                        <Button variant="outlined" color="primary"
-                            onClick={() => handleShowModal(modalNamesList.SING_IN_EMAIL)}
-                            className={style.buttonLink}>
-                            Sign in with email
-                  </Button>
+                        <SingAll handleShowModal={handleShowModal} />
                         <p className={style.questionSingIn}>No account?
                         <Link
                                 onClick={() => handleShowModal(modalNamesList.SING_UP_ALL)}

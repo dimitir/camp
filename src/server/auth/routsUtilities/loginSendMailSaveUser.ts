@@ -4,7 +4,7 @@ import HttpStatus from 'http-status-codes';
 import env from '../../../env';
 import createError from 'http-errors';
 import { createUser, getUserByEmail } from '../../db/user';
-import generateJwt, { generateMailJwt } from './_generateJwt';
+import generateJwt from './_generateJwt';
 
 
 
@@ -42,15 +42,15 @@ transporter.verify(function (error: any, success: any) {
 const login = (req: Request, res: Response, next: NextFunction) => {
 
 
-    const { email, lastLocation } = req.body;
+    const { email } = req.body;
 
-    if (!email && !lastLocation) {
+    if (!email) {
         return next(createError(400, 'Email and lastLocation is required'));
     }
 
 
     return (async () => {
-        const token = generateMailJwt(email, lastLocation, 2);
+        const token = generateJwt(email, 2);
         const mailOptionst = {
             from: '<eco>',
             to: email,
@@ -77,7 +77,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
         catch { return next(createError(403, 'User in not create')) }
 
 
-        try { return await res.status(HttpStatus.OK).json({ jwt: token }); }
+        try { return await res.status(HttpStatus.OK).send('OK'); }
         catch (e) { return next(createError(403, 'Bed request')) }
 
 

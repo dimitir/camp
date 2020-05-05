@@ -1,5 +1,5 @@
 import * as queryString from 'query-string';
-import env from '../../../env';
+import env from '../../../../env';
 const stringifiedParams = queryString.stringify({
     client_id: env.googleId,
     redirect_uri: 'http://localhost:3000/auth/google/callback',

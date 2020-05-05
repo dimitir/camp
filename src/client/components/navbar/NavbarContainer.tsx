@@ -12,7 +12,7 @@ const MapStateToProps = (state: RootStateType) => ({
 })
 
 const MapDispatchToProps = (dispatch: Dispatch) => ({
-    openModal: (name: string) => dispatch(showModal(name))
+    showModal: (name: string) => dispatch(showModal(name))
 });
 
 

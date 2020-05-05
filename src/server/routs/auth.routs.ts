@@ -1,6 +1,6 @@
 import express from 'express';
 import { Request, Response, NextFunction } from 'express';
-import { loginSendMailSaveUser, isAuthorizedFromMail, sendTokenEmailAuth, sendTokenGoogleAuth } from '../auth/utilities';
+import { loginSendMailSaveUser, isAuthorizedFromMail, sendUserDataAuth, sendUserDataGoogleAuth } from '../auth/routsUtilities';
 import passport from 'passport';
 
 var router = express.Router();
@@ -20,9 +20,9 @@ router.post('/profile', jsonParser, passport.authenticate('jwt', { session: fals
 );
 
 
-router.post('/emailWayFinish', jsonParser,
+router.post('/userData', jsonParser,
     (req: Request, res: Response, next: NextFunction) => {
-        sendTokenEmailAuth(req, res, next);
+        sendUserDataAuth(req, res, next);
     }
 );
 
@@ -39,7 +39,7 @@ router.get('/test', (req: Request, res: Response, next: NextFunction) => {
 
 router.post('/googleWayFinish', jsonParser,
     (req: Request, res: Response, next: NextFunction) => {
-        sendTokenGoogleAuth(req, res, next);
+        sendUserDataGoogleAuth(req, res, next);
     }
 );
 

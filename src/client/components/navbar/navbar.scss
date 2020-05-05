@@ -1,23 +1,43 @@
 .appBar {
+    box-shadow: 2px 3px 2px #ebeced;
+    background-color: white;
+}
+
+.toolBar {
     display: flex;
     justify-content: space-between;
 }
 
 .novLinks {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    max-width: 45%;
+    width: 100%;
+}
 
-    &>* {
-        margin-right: 20px;
+.buttonLogin {
+    border-color: #bbbfc4;
+    border-radius: 20px;
+    color: #919599;
+    text-transform: capitalize;
+    &:hover {
+        color: #339af0;
+        cursor: pointer;
+        text-decoration: none;
+        border-color: #339af0;
+        background-color: white;
     }
-
 }
 
 .link {
-
+    padding: 0 5px 0 5px;
+    color: #5b5c5e;
+    // color: #50565d;
     &:hover {
+        font-weight: 500;
         cursor: pointer;
+        color: #339af0;
         text-decoration: none;
     }
 }

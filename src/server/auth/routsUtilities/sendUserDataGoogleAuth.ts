@@ -6,7 +6,7 @@ import { getUserByEmail, getUserByIdAndUpdateFromProvider, createUserFromProvide
 import generateJwt from './_generateJwt';
 
 
-const sendTokenGoogleAuth = async (req: Request, res: Response, next: NextFunction) => {
+const sendUserDataGoogleAuth = async (req: Request, res: Response, next: NextFunction) => {
 
     if (req.body.tokenId) {
         const client = new OAuth2Client(env.googleId);
@@ -69,4 +69,4 @@ const sendTokenGoogleAuth = async (req: Request, res: Response, next: NextFuncti
 }
 
 
-export default sendTokenGoogleAuth;
+export default sendUserDataGoogleAuth;

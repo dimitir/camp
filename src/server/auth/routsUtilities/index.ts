@@ -1,11 +1,11 @@
 import loginSendMailSaveUser from './loginSendMailSaveUser';
 import isAuthorizedFromMail from './isAuthorizedFromMail';
-import sendTokenEmailAuth from './sendTokenEmailAuth';
-import sendTokenGoogleAuth from './sendTokenGoogleAuth';
+import sendUserDataAuth from './sendUserDataAuth';
+import sendUserDataGoogleAuth from './sendUserDataGoogleAuth';
 
 export {
     loginSendMailSaveUser,
     isAuthorizedFromMail,
-    sendTokenEmailAuth,
-    sendTokenGoogleAuth
+    sendUserDataAuth,
+    sendUserDataGoogleAuth
 }

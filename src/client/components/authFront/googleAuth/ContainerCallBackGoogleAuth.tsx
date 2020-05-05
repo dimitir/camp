@@ -1,7 +1,7 @@
 import { connect, ConnectedProps } from 'react-redux';
-import CallBackHendler from './CallBackAuthHendler';
+import CallBackGoogle from './CallBackGoogleAuth';
 import { Dispatch } from 'Redux';
-import { sendCodeGoogleAuth } from '../../store/auth/actions';
+import { sendCodeGoogleAuth } from '../../../store/auth/actions';
 
 
 const MapDispathToProps = (dispatch: Dispatch) => ({
@@ -12,4 +12,4 @@ const connector = connect(null, MapDispathToProps);
 
 export type PropsTypes_CallBack = ConnectedProps<typeof connector>;
 
-export default connector(CallBackHendler);
+export default connector(CallBackGoogle);

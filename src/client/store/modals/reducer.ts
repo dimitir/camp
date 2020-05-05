@@ -12,7 +12,7 @@ const modalsReducer = (state = initialState, action: ShowModalType) => {
             return {
                 ...state,
                 showModal: true,
-                typeModal: action.modalsSingPayload.modalType
+                typeModal: action.modalType
             }
 
         case dispatchAction.CLOSE_MODAL:

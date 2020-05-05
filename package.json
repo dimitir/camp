@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "bld": "webpack --mode production",
-    "start": "npm run build && node src/server/index.ts",
+    "start": "npm run bld && node src/server/index.ts",
     "client": "webpack-dev-server --env.ENVIRONMENT=development --mode development --devtool inline-source-map --hot",
     "server": "nodemon -r dotenv/config src/server/index.ts dotenv_config_path=.env.development ",
     "dev": "  concurrently \"npm run server\" \"npm run client\""

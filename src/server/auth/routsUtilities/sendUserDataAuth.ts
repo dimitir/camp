@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import env from '../../../env';
 import { getUserByEmail } from '../../db/user';
 
-const sendTokenEmailAuth = (req: Request, res: Response, next: NextFunction) => {
+const sendUserDataAuth = (req: Request, res: Response, next: NextFunction) => {
     const token = req.body.token;
     if (!token) {
         next(createError(400, 'Have not the token'))
@@ -24,4 +24,4 @@ const sendTokenEmailAuth = (req: Request, res: Response, next: NextFunction) => 
     }
 }
 
-export default sendTokenEmailAuth;
+export default sendUserDataAuth;

@@ -1,5 +1,5 @@
 import { put, takeEvery, all, take, select, fork, call } from 'redux-saga/effects';
-import { watchUserSendEmail, watchFirstAuthConnect, watchSingUpGoogle } from './auth';
+import { watchUserSendEmail, watchFirstAuthConnect, watchSingUpGoogle, watchSingUpFacebook, watchActiveAuth } from './auth';
 
 
 export default function* rootSaga() {
@@ -7,5 +7,7 @@ export default function* rootSaga() {
         watchUserSendEmail(),
         watchFirstAuthConnect(),
         watchSingUpGoogle(),
+        watchSingUpFacebook(),
+        watchActiveAuth()
     ])
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,7 +16,7 @@ import { useParams, useLocation } from 'react-router-dom';
 
 
 
-const Navbar: React.FC<PropTypes_Navbar> = ({ openModal, user }: PropTypes_Navbar) => {
+const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user }: PropTypes_Navbar) => {
     console.log(user);
 
     const location = useLocation();
@@ -25,45 +24,52 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ openModal, user }: PropTypes_Navba
         if (location.pathname) {
             localStorage.setItem('lastLocation', location.pathname);
         }
-        openModal(modalName.SING_UP_ALL)
+        showModal(modalName.SING_UP_ALL)
     }
-
+    const linkVariant = 'body2';
     return (
         <>
             <CssBaseline />
-            <AppBar position="static" color="default" elevation={0} >
-                <Toolbar className={style.appBar} >
+            <AppBar className={style.appBar} position="static" color="default" elevation={0} >
+                <Toolbar className={style.toolBar} >
                     <Typography variant="h6" color="inherit" noWrap  >
-                        Logo
+                        GoHome
                    </Typography>
                     <div className={style.novLinks}>
 
                         <Link
-                            variant="button"
+                            variant={linkVariant}
                             color="textPrimary" href="#"
                             className={style.link}>
-                            Trips
+                            Hikes
                         </Link>
                         <Link
-                            variant="button"
+                            variant={linkVariant}
                             color="textPrimary"
                             href="#"
                             className={style.link}>
-                            Blog
+                            Routs
                        </Link>
-                        <Link variant="button" color="textPrimary" href="#"
+                        <Link
+                            variant={linkVariant}
+                            color="textPrimary" href="#"
                             className={style.link}>
                             Info
                         </Link>
-
-                        <Button
-                            href="#"
-                            color="primary"
-                            variant="outlined"
-                            className={style.link} onClick={() => handelLogin()}>
-                            Login
-                       </Button>
+                        <Link
+                            variant={linkVariant}
+                            color="textPrimary" href="#"
+                            className={style.link}>
+                            We
+                        </Link>
                     </div>
+                    <Button
+                        href="#"
+                        color="primary"
+                        variant="outlined"
+                        className={style.buttonLogin} onClick={() => handelLogin()}>
+                        Login
+                       </Button>
 
                 </Toolbar>
             </AppBar>

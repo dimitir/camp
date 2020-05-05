@@ -14,19 +14,17 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
     }
 
     const token = auth.substring(7, auth.length);
-
     let decoded;
     try { decoded = jwt.verify(token, env.jwtSecret); }
     catch { return next(createError(403, 'cennot verify jwt, decoded failed')); }
 
     if (!decoded.hasOwnProperty('email')
-        || !decoded.hasOwnProperty('expiration')
-        || !decoded.hasOwnProperty('lastLocation')) {
+        || !decoded.hasOwnProperty('expiration')) {
         return next(createError(403, 'invalid jwt token, absent necessary data'));
     }
 
 
-    const { email, expiration, lastLocation } = (decoded as { email: string, expiration: Date, lastLocation: string });
+    const { email, expiration } = (decoded as { email: string, expiration: Date });
 
     if (expiration < new Date()) {
         return next(createError(403, 'token has expired'));
@@ -46,10 +44,7 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
             const id = findUser._id;
             const authTrue: boolean = true;
             const setData = await getUserByIdAndUpdate(id, newJwt, authTrue);
-            console.log('setData');
-            console.log(setData);
-            res.redirect(`${env.hostFront + lastLocation}`);
-            res.send(setData);
+            res.redirect(`${env.hostFront}/auth/email/callback?token=${newJwt}`);
         } catch{
             return next(createError(403, 'Failed to update user'));
         }

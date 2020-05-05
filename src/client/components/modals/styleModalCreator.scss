@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    outline: 'none';
+    outline: "none";
     //  background-color: rgb(255, 255, 255);
 
     .paper {
@@ -21,15 +21,26 @@
         }
 
         .linkToSingUpAll {
-            color: '#777777';
+            color: "#777777";
             margin-left: -10px;
-
         }
 
         .buttonLink {
             text-transform: none;
             margin-bottom: 10px;
-            min-width: 250px;
+            width: 250px;
+             
+            .buttonLinkSpan {
+                margin-left: 60px;
+                display: flex;
+                justify-content: flex-start;
+                // justify-items: center;
+            }
+            .textButton {
+                margin-top: 3px;
+                margin-left: 15px;
+                width: 200px;
+            }
         }
 
         .buttonContinue {
@@ -39,11 +50,9 @@
         }
 
         .iconArrowLeft {
-            color: '#777777';
+            color: "#777777";
         }
     }
-
-
 
     .descriptionTitle {
         margin-bottom: 50px;
@@ -52,14 +61,12 @@
     .questionSingIn {
         margin-top: 50px;
         // margin-bottom: 150px;
-
     }
 }
 
 .modalBackground {
-    color:red;
+    color: red;
     width: 5000px;
     // background-color: rgba(255, 255, 255, 0.8);
     background-color: rgb(255, 255, 255);
-
 }

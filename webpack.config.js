@@ -82,8 +82,9 @@ module.exports = (env, argv) => {
         ]
       },
       {
-        test: /\.css$/,
-        exclude: /\.module.css$/,
+
+        test: /\.global\.css$/,
+        exclude: /\.css$/,
         use: [{
           loader: MiniCssExtractPlugin.loader,
         },
@@ -93,7 +94,7 @@ module.exports = (env, argv) => {
         ]
       },
       {
-        test: /\.module\.css$/,
+        test: /\.css$/,
         use: [
           isDevelopmentMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           "css-modules-typescript-loader",
@@ -127,12 +128,7 @@ module.exports = (env, argv) => {
 
     },
     node: { fs: 'empty' },
-   /*  node: {
-      child_process: 'empty',
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty'
-    }, */
+   
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
@@ -148,21 +144,3 @@ module.exports = (env, argv) => {
   };
 };
 
-
-// "process.env.JWT_SECRET": JSON.stringify("aCoolValue")
-
-// proxy:{ '/api/**': { target: 'http://localhost:4001', secure: false } }
-
-/* {
-          target: 'http://localhost:8090',
-          secure: false,
-          changeOrigin: true,
-          headers: {
-            Connection: 'keep-alive'
-          },
-        } */
-
-
-/*  proxy: {
-'/api': 'http://localhost:8090',
-}, */

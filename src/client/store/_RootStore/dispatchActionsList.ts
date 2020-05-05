@@ -7,7 +7,9 @@ const actionsApp = keyMirror({
     CURRENT_USER: true,
     LOGIN_SEND_EMAIL: true,
     SEND_AUTH_CODE_TO_GOOGLE: true,
+    SEND_AUTH_CODE_TO_FACEBOOK: true,
     SET_AUTH_USER_DATA: true,
+    MANAGE_CALL_BACK_EMAIL_AUTH: true,
 });
 
 export default actionsApp;

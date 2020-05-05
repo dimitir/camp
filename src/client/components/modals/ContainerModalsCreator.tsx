@@ -12,10 +12,6 @@ const mapStateToProps = (state: RootStateType) => ({
 })
 
 
-
-
-
-
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     handleClose: () => dispatch(closeModal()),
     handleShowModal: (nameModal: string) => dispatch(showModal(nameModal)),
@@ -31,7 +27,10 @@ const connector = connect(
 
 export type PropsTypes_Modal = ConnectedProps<typeof connector>;
 export type PropsTypesModalSingAll = Omit<PropsTypes_Modal, 'typeModal' | 'handleSendEmail'>;
-export type PropsTypesModalSingEmail = Omit<PropsTypes_Modal, 'typeModal' | 'handleSendAcsessTokenGoogle'>;
+export type PropsTypesModalSingEmail = Omit<PropsTypes_Modal, 'typeModal'>;
+export type PropsTypesModalCheckYouInbox =
+    Omit<PropsTypes_Modal, 'typeModal' | 'handleSendEmail' | 'handleShowModal'>;
+export type PropsTypes_SingAll = Pick<PropsTypes_Modal, 'handleShowModal'>;
 
 
 

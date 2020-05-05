@@ -2,8 +2,10 @@
 // Please do not change this file!
 interface CssExports {
   'appBar': string;
+  'buttonLogin': string;
   'link': string;
   'novLinks': string;
+  'toolBar': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

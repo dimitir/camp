@@ -6,11 +6,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 
-import { PropsTypesModalSingEmail } from './ContainerModalsCreator';
+import { PropsTypesModalCheckYouInbox } from './ContainerModalsCreator';
 import style from './styleModalCreator.scss';
 
 
-const ModalSingUpAll: React.FC<PropsTypesModalSingEmail> = ({ open, handleClose, handleShowModal, handleSendEmail }: PropsTypesModalSingEmail) => {
+const ModalSingUpAll: React.FC<PropsTypesModalCheckYouInbox> = ({ open, handleClose }: PropsTypesModalCheckYouInbox) => {
 
     return (
         <>

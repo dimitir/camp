@@ -1,11 +1,16 @@
 
 export interface ShowModalType {
     type: string
+    modalType: string
+}
+/* 
+export interface ShowModalType {
+    type: string
     modalsSingPayload: {
         visible: boolean,
         modalType: string
     }
-}
+} */
 
 export interface InitialStateModals {
     showModal: boolean;
@@ -29,7 +34,7 @@ export interface TypeSendEmail {
 
 
 
-export interface TypeSendCodeGoogleAuth {
+export interface TypeSendCodeSocialAuth {
     type: string;
     code: string;
 }

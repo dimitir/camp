@@ -4,10 +4,7 @@ import { ShowModalType, CloseModalType } from '../_RootStore/types';
 
 export const showModal = (modalType: string): ShowModalType => ({
     type: dispatchActions.SHOW_MODAL,
-    modalsSingPayload: {
-        visible: true,
-        modalType: modalType
-    }
+    modalType: modalType
 })
 
 
@@ -16,4 +13,3 @@ export const closeModal = (): CloseModalType => ({
 })
 
 
- 
