@@ -43,7 +43,7 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
             const newJwt = generateJwt(email, 24 * 60);
             const id = findUser._id;
             const authTrue: boolean = true;
-            const setData = await getUserByIdAndUpdate(id, newJwt, authTrue);
+            const setData = await getUserByIdAndUpdate(id, newJwt);
             res.redirect(`${env.hostFront}/auth/email/callback?token=${newJwt}`);
         } catch{
             return next(createError(403, 'Failed to update user'));

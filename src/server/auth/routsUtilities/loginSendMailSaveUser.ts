@@ -40,8 +40,6 @@ transporter.verify(function (error: any, success: any) {
 
 
 const login = (req: Request, res: Response, next: NextFunction) => {
-
-
     const { email } = req.body;
 
     if (!email) {
@@ -64,22 +62,11 @@ const login = (req: Request, res: Response, next: NextFunction) => {
             return next(createError(403, 'Mail is not send'))
         }
 
-        //  add remove user when his sing out!!!, or overtime is heppen
-        /*     try {
-                const user = await getUserByEmail(email);
-                if (user) { return next(createError(403, 'Email in already use')) }
-            } catch (error) {
-                return next(createError(403, 'User in not check'))
-            }
-     */
-
         try { const newUser = await createUser(token, email); }
         catch { return next(createError(403, 'User in not create')) }
 
-
         try { return await res.status(HttpStatus.OK).send('OK'); }
         catch (e) { return next(createError(403, 'Bed request')) }
-
 
     })()
 }

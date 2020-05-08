@@ -13,6 +13,11 @@ const authUserReducer = (state = initialState, action: ActionTypeAuth) => {
                 ...state,
                 user: action.user,
             }
+        case dispatchAction.USER_LOGOUT:
+            return {
+                ...state,
+                user: {},
+            }
 
         case dispatchAction.LOGIN_SEND_EMAIL:
             return {

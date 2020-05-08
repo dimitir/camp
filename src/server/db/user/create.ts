@@ -9,12 +9,15 @@ const createUser = async (
         jwt: token,
         email: email,
         auth: false,
+        provider: 'email',
+        providerId: null,
+        firstName: null,
+        lastName: null,
+        picture: null,
     };
     const authFirst = await UserModel.create(userAuthData);
     return await authFirst.save();
 }
-
-
 
 
 const createUserFromProvider = async ({
@@ -24,26 +27,18 @@ const createUserFromProvider = async ({
     providerId,
     firstName,
     lastName,
-    displayName,
     picture,
-    locale
 }: TypeCreateUserProvider
 ) => {
-
-    console.log(displayName);
-    console.log('displayName');
-
     const userAuthData = {
         jwt,
-        email: email,
+        email,
         auth: true,
         provider,
         providerId,
         firstName,
         lastName,
-        displayName,
         picture,
-        locale
     };
     const authFirst = await UserModel.create(userAuthData);
     const user = await authFirst.save();
@@ -54,5 +49,5 @@ const createUserFromProvider = async ({
 
 export {
     createUser,
-    createUserFromProvider  
+    createUserFromProvider
 }

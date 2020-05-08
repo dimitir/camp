@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
             marginLeft: '60px',
             display: 'flex',
             justifyContent: 'flex - start',
+            '&:hover': {
+                textDecoration: 'none',
+            }
         },
         textButton: {
             marginTop: '3px',
@@ -34,19 +37,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const SingAll = ({ handleShowModal }: PropsTypes_SingAll) => {
+const _SingAll = ({ handleShowModal }: PropsTypes_SingAll) => {
     const classes = useStyles();
     return (
         <>
-            <Link href={googleLoginUrl}>
-                <Button variant="outlined" color="primary"
-                    className={classes.buttonLink}>
-                    <span className={classes.buttonLinkSpan}>
-                        <i className="fab fa-google fa-2x"></i>
-                        <Typography variant="body2" gutterBottom align="left" display='block' className={classes.textButton}>
-                            Sign in with Google</Typography></span>
-                </Button>
-            </Link>
+            <Button href={googleLoginUrl} variant="outlined" color="primary"
+                className={classes.buttonLink}>
+                <span className={classes.buttonLinkSpan}>
+                    <i className="fab fa-google fa-2x"></i>
+                    <Typography variant="body2" gutterBottom align="left" display='block' className={classes.textButton}>
+                        Sign in with Google</Typography></span>
+            </Button>
             <Button
                 href={facebookLoginUrl}
                 variant="outlined" color="primary"
@@ -68,4 +69,4 @@ const SingAll = ({ handleShowModal }: PropsTypes_SingAll) => {
     )
 }
 
-export default SingAll;
+export default _SingAll;

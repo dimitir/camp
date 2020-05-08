@@ -27,7 +27,6 @@ export interface TypeCreateUserProvider {
     providerId: string;
     firstName: string;
     lastName: string;
-    displayName: string;
-    picture: string;
+    picture?: string;
     locale?: string;
 }

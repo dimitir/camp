@@ -27,3 +27,9 @@ export const setAuthUserData = (user: any): TypeSetUserData => ({
     type: dispatchActions.SET_AUTH_USER_DATA,
     user: user
 });
+
+
+// change store
+export const userLogout = () => ({
+    type: dispatchActions.USER_LOGOUT,
+});

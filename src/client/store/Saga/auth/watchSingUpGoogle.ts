@@ -37,7 +37,7 @@ async function fetchToBackToSetJWT(tokenId: string) {
     };
 
     let response, dataRespond, text;
-    try { response = await fetch('api/auth/googleWayFinish', options) }
+    try { response = await fetch('api/auth/google', options) }
     catch (err) { new Error('fetch auth singup is failed'); }
 
     if (response) {

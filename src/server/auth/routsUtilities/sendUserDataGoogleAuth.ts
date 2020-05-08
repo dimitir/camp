@@ -41,9 +41,7 @@ const sendUserDataGoogleAuth = async (req: Request, res: Response, next: NextFun
                     providerId: payload['sub'],
                     firstName: payload['given_name'],
                     lastName: payload['family_name'],
-                    displayName: payload['name'],
-                    locale: payload['locale']
-
+                    picture: (payload['picture'] as string),
                 });
                 res.send(userUpdate);
             } catch { return next(createError(403, 'error occurred when getUserByIdAndUpdateFromProvider ')); }
@@ -58,9 +56,7 @@ const sendUserDataGoogleAuth = async (req: Request, res: Response, next: NextFun
                     providerId: (payload['sub'] as string),
                     firstName: (payload['given_name'] as string),
                     lastName: (payload['family_name'] as string),
-                    displayName: (payload['name'] as string),
                     picture: (payload['picture'] as string),
-                    locale: (payload['locale'] as string)
                 });
                 res.send(userProvider);
             } catch { return next(createError(403, 'error occured in func createUserFromProvider')); }

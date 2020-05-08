@@ -41,12 +41,11 @@ async function fetchToBackForUser(token: string) {
 export default function* watchActiveAuth() {
     try {
         const token = localStorage.getItem('token');
-        console.log(token);
-        const user = yield call(fetchToBackForUser, (token as string));
-        console.log('SET_AUTH_USER_DATA');
-        console.log('SET_AUTH_USER_DATA');
-        console.log(user);
-        yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+        if (token) {
+            const user = yield call(fetchToBackForUser, (token as string));
+            yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+        }
+
     }
     catch (err) {
         console.error(err);

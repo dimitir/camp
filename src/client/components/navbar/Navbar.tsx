@@ -11,21 +11,14 @@ import { PropTypes_Navbar } from './NavbarContainer';
 import style from './navbar.scss';
 import modalName from '../../store/modals/modalNamesList';
 import { useParams, useLocation } from 'react-router-dom';
+import _Login from './_Login';
 
 
 
 
 
-const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user }: PropTypes_Navbar) => {
-    console.log(user);
+const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
 
-    const location = useLocation();
-    const handelLogin = () => {
-        if (location.pathname) {
-            localStorage.setItem('lastLocation', location.pathname);
-        }
-        showModal(modalName.SING_UP_ALL)
-    }
     const linkVariant = 'body2';
     return (
         <>
@@ -48,7 +41,7 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user }: PropTypes_Navba
                             color="textPrimary"
                             href="#"
                             className={style.link}>
-                            Routs
+                            Trails
                        </Link>
                         <Link
                             variant={linkVariant}
@@ -63,13 +56,11 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user }: PropTypes_Navba
                             We
                         </Link>
                     </div>
-                    <Button
-                        href="#"
-                        color="primary"
-                        variant="outlined"
-                        className={style.buttonLogin} onClick={() => handelLogin()}>
-                        Login
-                       </Button>
+                    <_Login
+                        showModal={showModal}
+                        user={user}
+                        userLogout={userLogout}
+                    />
 
                 </Toolbar>
             </AppBar>

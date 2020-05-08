@@ -3,15 +3,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require("webpack");
-const outputDirectory = 'dist';
 const dotenv = require('dotenv');
 const fs = require("fs");
+const outputDirectory = 'dist';
 
 module.exports = (env, argv) => {
   const isDevelopmentMode = (argv.mode === 'development');
 
   const currentPath = path.join(__dirname);
   const basePath = currentPath + '/.env';
+  // env.ENVIRONMENT = development -> env.development
   const envPath = basePath + '.' + env.ENVIRONMENT;
   const finalPath = fs.existsSync(envPath) ? envPath : basePath;
   const fileEnv = dotenv.config({ path: finalPath }).parsed;
@@ -40,10 +41,10 @@ module.exports = (env, argv) => {
       },
       {
         test: /\.ts(x)?$/,
+        exclude: /node_modules/,
         use: [
           'awesome-typescript-loader'
         ],
-        exclude: /node_modules/
       },
       {
         test: /\.global\.s(a|c)ss$/,
@@ -60,7 +61,6 @@ module.exports = (env, argv) => {
           }
         ]
       },
-
       {
         test: /\.s(a|c)ss$/,
         exclude: /\.global.(s(a|c)ss)$/,
@@ -82,7 +82,6 @@ module.exports = (env, argv) => {
         ]
       },
       {
-
         test: /\.global\.css$/,
         exclude: /\.css$/,
         use: [{
@@ -120,15 +119,13 @@ module.exports = (env, argv) => {
     },
     devServer: {
       historyApiFallback: true,
-      /* contentBase: './', */
-      /* hot: true, */
       port: 3000,
       open: true,
       proxy: { '/api/**': { target: 'http://localhost:8090', secure: false, changeOrigin: true, } },
 
     },
     node: { fs: 'empty' },
-   
+
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({

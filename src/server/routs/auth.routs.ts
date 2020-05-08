@@ -1,6 +1,9 @@
 import express from 'express';
 import { Request, Response, NextFunction } from 'express';
-import { loginSendMailSaveUser, isAuthorizedFromMail, sendUserDataAuth, sendUserDataGoogleAuth } from '../auth/routsUtilities';
+import {
+    loginSendMailSaveUser, isAuthorizedFromMail, sendUserDataAuth,
+    sendUserDataGoogleAuth, sendUserDataFacebookAuth
+} from '../auth/routsUtilities';
 import passport from 'passport';
 
 var router = express.Router();
@@ -10,7 +13,6 @@ const jsonParser = express.json();
 router.post('/loginEmail', jsonParser, (req: Request, res: Response, next: NextFunction) => {
     loginSendMailSaveUser(req, res, next);
 });
-
 
 
 router.post('/profile', jsonParser, passport.authenticate('jwt', { session: false }),
@@ -36,10 +38,17 @@ router.get('/test', (req: Request, res: Response, next: NextFunction) => {
     res.send('test');
 });
 
-
-router.post('/googleWayFinish', jsonParser,
+router.post('/google', jsonParser,
     (req: Request, res: Response, next: NextFunction) => {
         sendUserDataGoogleAuth(req, res, next);
+    }
+);
+
+
+router.post('/facebook', jsonParser,
+    (req: Request, res: Response, next: NextFunction) => {
+        console.log('facebook');
+        sendUserDataFacebookAuth(req, res, next);
     }
 );
 
