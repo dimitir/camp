@@ -1,7 +1,7 @@
 import passport from 'passport';
 import passportJWT from "passport-jwt";
-import { jwtSecret } from '../../../env';
-import { getUserByEmail } from '../../db/user';
+import { jwtSecret } from '../../../../env';
+import { getUserByEmail } from '../../../db/user';
 import ExtractJwt = passportJWT.ExtractJwt;
 const JWTStrategy = passportJWT.Strategy;
 

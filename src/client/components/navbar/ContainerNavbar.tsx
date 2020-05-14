@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 
 import Navbar from './Navbar';
 import { showModal } from '../../store/modals/actions';
-import { RootStateType } from '../../store/_RootStore/rootReducers';
+import { RootStateType } from '../../store/storeConfig/rootReducers';
 import { userLogout } from '../../store/auth/actions';
 
 

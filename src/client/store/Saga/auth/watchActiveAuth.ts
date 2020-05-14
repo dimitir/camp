@@ -1,6 +1,6 @@
 import { take, call, put } from 'redux-saga/effects';
 import jwt from 'jsonwebtoken';
-import actionsList from '../../_RootStore/dispatchActionsList';
+import actionsList from '../../storeConfig/dispatchActionsList';
 import env from '../../../../env';
 
 async function fetchToBackForUser(token: string) {
@@ -41,9 +41,23 @@ async function fetchToBackForUser(token: string) {
 export default function* watchActiveAuth() {
     try {
         const token = localStorage.getItem('token');
+        console.log(token);
         if (token) {
-            const user = yield call(fetchToBackForUser, (token as string));
-            yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+            let user;
+            try {
+                user = yield call(fetchToBackForUser, (token as string));
+                if (user) {
+                    yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+                }
+                else {
+                    throw new Error(' initial user is not get')
+                }
+            }
+            catch{
+                user = {};
+                yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+                throw new Error(' initial user is not get')
+            }
         }
 
     }

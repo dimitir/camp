@@ -1,5 +1,5 @@
 import { connect, ConnectedProps } from 'react-redux';
-import { RootStateType } from '../../store/_RootStore/rootReducers';
+import { RootStateType } from '../../store/storeConfig/rootReducers';
 import { Dispatch } from 'redux';
 import { closeModal, showModal } from '../../store/modals/actions';
 import { sendEmail } from '../../store/auth/actions';
@@ -9,7 +9,7 @@ import ModalsCreator from './ModalsCreator';
 const mapStateToProps = (state: RootStateType) => ({
     open: state.modal.showModal,
     typeModal: state.modal.typeModal,
-})
+});
 
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

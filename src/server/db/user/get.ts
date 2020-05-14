@@ -1,4 +1,4 @@
-const { UserModel } = require('../schema.ts');
+import { UserModel } from './schema';
 
 const getUserByEmail = async (userEmail: string) => {
     return await UserModel.findOne({ email: userEmail })

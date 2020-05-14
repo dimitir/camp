@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 import axios from 'axios';
-import { getUserByEmail, getUserByIdAndUpdateFromProvider, createUserFromProvider } from '../../db/user';
+import { getUserByEmail, getUserByIdAndUpdateFromProvider, createUserFromProvider } from '../../../db/user';
 import generateJwt from './_generateJwt';
 
 
 const sendUserDataFacebookAuth = async (req: Request, res: Response, next: NextFunction) => {
-
+    console.group('facebook');
     if (req.body.access_token) {
         const access_token = req.body.access_token;
         let data;

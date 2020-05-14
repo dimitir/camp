@@ -12,7 +12,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import { PropTypes_Navbar } from './NavbarContainer';
+import { PropTypes_Navbar } from './ContainerNavbar';
 import style from './navbar.scss';
 import modalName from '../../store/modals/modalNamesList';
 import { useParams, useLocation } from 'react-router-dom';
@@ -66,20 +66,16 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
     }
 
 
-
-
     let imgUserSrc;
     try {
-        if (user) {
+        if (user.picture) {
             imgUserSrc = user.picture;
         }
         else {
-            console.log('test1');
             imgUserSrc = `https://robohash.org/${'user.firstName'}.png`;
-            // imgUserSrc = `http://graph.facebook.com/67563683055/picture?type=normal`;
         }
     } catch{
-        user.auth = false;
+        user = false;
         throw new Error('user is absent');
     }
 

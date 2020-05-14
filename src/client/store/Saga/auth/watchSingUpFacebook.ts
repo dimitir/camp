@@ -1,5 +1,5 @@
 import { take, call, put } from 'redux-saga/effects';
-import actionsList from '../../_RootStore/dispatchActionsList';
+import actionsList from '../../storeConfig/dispatchActionsList';
 import env from '../../../../env';
 import axios from 'axios';
 

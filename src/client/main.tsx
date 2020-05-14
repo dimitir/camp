@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga'
   import rootSaga from './store/Saga/sagas';
 import { StylesProvider } from "@material-ui/core/styles";
 import App from './App';
-import reducer from './store/_RootStore/rootReducers';
+import reducer from './store/storeConfig/rootReducers';
 const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(logger, sagaMiddleware)));

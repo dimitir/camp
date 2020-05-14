@@ -1,5 +1,5 @@
-import dispatchActions from '../_RootStore/dispatchActionsList';
-import { ShowModalType, CloseModalType } from '../_RootStore/types';
+import dispatchActions from '../storeConfig/dispatchActionsList';
+import { ShowModalType, CloseModalType } from '../storeConfig/types';
 
 
 export const showModal = (modalType: string): ShowModalType => ({

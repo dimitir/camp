@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import {
     loginSendMailSaveUser, isAuthorizedFromMail, sendUserDataAuth,
     sendUserDataGoogleAuth, sendUserDataFacebookAuth
-} from '../auth/routsUtilities';
+} from './utilities';
 import passport from 'passport';
 
 var router = express.Router();

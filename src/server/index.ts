@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import bluebird from 'bluebird';
 mongoose.Promise = bluebird;
 import { port, dbConnectionString } from '../env';
-import { initialiseAuthentication } from './auth/auth';
+import { initialiseAuthentication } from './servise/auth';
 import routsApp from './routs';
 
 const app = express();

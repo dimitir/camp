@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import generateJwt from './_generateJwt';
 import createError from 'http-errors';
-import env from '../../../env';
-import { getUserByEmail, getUserByIdAndUpdate } from '../../db/user';
+import env from '../../../../env';
+import { getUserByEmail, getUserByIdAndUpdate } from '../../../db/user';
 
 const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 
@@ -41,10 +41,13 @@ const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
 
         try {
             const newJwt = generateJwt(email, 24 * 60);
-            const id = findUser._id;
-            const authTrue: boolean = true;
-            const setData = await getUserByIdAndUpdate(id, newJwt);
-            res.redirect(`${env.hostFront}/auth/email/callback?token=${newJwt}`);
+            if (findUser) {
+                const id = findUser._id;
+                const authTrue: boolean = true;
+                const setData = await getUserByIdAndUpdate(id, newJwt);
+                res.redirect(`${env.hostFront}/auth/email/callback?token=${newJwt}`);
+
+            }
         } catch{
             return next(createError(403, 'Failed to update user'));
         }

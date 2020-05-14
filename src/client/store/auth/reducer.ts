@@ -1,5 +1,5 @@
-import dispatchAction from '../_RootStore/dispatchActionsList';
-import { ActionTypeAuth } from '../_RootStore/types';
+import dispatchAction from '../storeConfig/dispatchActionsList';
+import { ActionTypeAuth } from '../storeConfig/types';
 
 const initialState = {
     user: {},

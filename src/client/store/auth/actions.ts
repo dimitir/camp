@@ -1,5 +1,5 @@
-import dispatchActions from '../_RootStore/dispatchActionsList';
-import { TypeSendEmail, TypeSendCodeSocialAuth, TypeSetUserData } from '../_RootStore/types';
+import dispatchActions from '../storeConfig/dispatchActionsList';
+import { TypeSendEmail, TypeSendCodeSocialAuth, TypeSetUserData } from '../storeConfig/types';
 
 // change store
 export const sendEmail = (email: string): TypeSendEmail => ({

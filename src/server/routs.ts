@@ -1,6 +1,6 @@
 import { Application } from "express";
-import authRoutes from './auth.routs';
-import { baseApiUrl } from '../../env';
+import authRoutes from './servise/auth/auth.routs';
+import { baseApiUrl } from '../env';
 
 
 const routsApp = (app: Application) => {

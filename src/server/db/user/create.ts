@@ -1,5 +1,5 @@
-import { UserModel } from '../schema';
-import { TypeCreateUserProvider } from '../Types';
+import { UserModel } from './schema';
+import { TypeCreateUserProvider } from './Types';
 
 const createUser = async (
     token: string,

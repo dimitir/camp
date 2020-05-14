@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { OAuth2Client } from 'google-auth-library';
 import createError from 'http-errors';
-import env from '../../../env';
-import { getUserByEmail, getUserByIdAndUpdateFromProvider, createUserFromProvider } from '../../db/user';
+import env from '../../../../env';
+import { getUserByEmail, getUserByIdAndUpdateFromProvider, createUserFromProvider } from '../../../db/user';
 import generateJwt from './_generateJwt';
 
 

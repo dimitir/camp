@@ -1,5 +1,5 @@
-import dispatchAction from '../_RootStore/dispatchActionsList';
-import { ShowModalType } from '../_RootStore/types';
+import dispatchAction from '../storeConfig/dispatchActionsList';
+import { ShowModalType } from '../storeConfig/types';
 
 const initialState = {
     showModal: false,

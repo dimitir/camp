@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import nodemailer from 'nodemailer';
 import HttpStatus from 'http-status-codes';
-import env from '../../../env';
+import env from '../../../../env';
 import createError from 'http-errors';
-import { createUser, getUserByEmail } from '../../db/user';
+import { createUser, getUserByEmail } from '../../../db/user';
 import generateJwt from './_generateJwt';
 
 

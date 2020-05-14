@@ -1,6 +1,6 @@
 import { take, call, put } from 'redux-saga/effects';
 import jwt from 'jsonwebtoken';
-import actionsList from '../../_RootStore/dispatchActionsList';
+import actionsList from '../../storeConfig/dispatchActionsList';
 import env from '../../../../env';
 
 async function fetchToBackForUser(token: string) {
@@ -45,9 +45,10 @@ export default function* watchCallBackEmailAuth() {
             console.group('email group');
             console.log(token);
             const user = yield call(fetchToBackForUser, token);
-            console.log('token');
-            console.log(user);
-            yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+            if (user) {
+                yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+                localStorage.setItem('token', user.jwt)
+            }
         }
         catch (err) {
             console.error(err);
