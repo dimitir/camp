@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainPageContainer from './components/pages/mainPage/MainPageContainer';
 import ContainerNavbar from './components/navbar/ContainerNavbar';
 import AuthCallback from './components/authFront/AuthCallback';
-import ContainerTrailsCreate from './components/pages/trails/createTrail/ContainerCreateTrail';
+import ContainerHikeCreate from './components/pages/hikes/createHikes/ContainerCreateHike';
 import ContainerModalsCreator from './components/modals/ContainerModalsCreator';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -23,8 +23,8 @@ export default class App extends Component {
                     <ContainerNavbar />
                     <Switch>
                         <Route component={MainPageContainer} path='/' exact />
-                        
-                        <Route component={ContainerTrailsCreate} path='/trails/create' exact />
+
+                        <Route component={ContainerHikeCreate} path='/hikes/create' exact />
 
                         <Route component={AuthCallback} path='/auth' />
                     </Switch>

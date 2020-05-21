@@ -82,8 +82,8 @@ module.exports = (env, argv) => {
         ]
       },
       {
-        test: /\.global\.css$/,
-        exclude: /\.css$/,
+        test: /\.css$/,
+        exclude: /\.module\.css$/,
         use: [{
           loader: MiniCssExtractPlugin.loader,
         },
@@ -93,7 +93,7 @@ module.exports = (env, argv) => {
         ]
       },
       {
-        test: /\.css$/,
+        test: /\.module\.css$/,
         use: [
           isDevelopmentMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           "css-modules-typescript-loader",
@@ -141,3 +141,4 @@ module.exports = (env, argv) => {
   };
 };
 
+/*  */

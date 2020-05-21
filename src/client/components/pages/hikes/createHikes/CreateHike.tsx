@@ -5,15 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
 import 'date-fns';
 import _DatePicker from './_DatePicker';
+import EditorQ from '../../_tools/textEditorQ/EditorQ';
 
 
 
 const jssStyle = (theme: Theme) =>
     createStyles({
         pageTitle: {
-            // fontSize: '1.5rem',
             textAlign: 'center',
             marginTop: '160px',
             marginBottom: '80px',
@@ -26,28 +27,44 @@ const jssStyle = (theme: Theme) =>
             hight: '400px',
             marginBottom: '50px',
         },
-        trailName: {
+        hikeName: {
             marginTop: '20px',
         },
         shortDiscription: {
             marginTop: '20px',
-        }
+        },
+        textEditor: {
+            marginTop: '60px',
+            borderBottom: 'solid',
+            borderColor: 'black'
 
+        },
+        textEditorQ: {
+            marginTop: '60px',
+            borderRadius: '20px',
+            borderColor: 'red'
+        },
 
     })
 
-const useStyles = makeStyles(jssStyle)
+const useStyles = makeStyles(jssStyle);
 
 
 
 
-const CreateTrail = () => {
+const CreateHike = () => {
     const [selectedDateStart, setSelectedDateStart] = React.useState<Date | null>(
         new Date(),
     );
     const [selectedDateFinish, setSelectedDateFinish] = React.useState<Date | null>(
         new Date(),
     );
+
+
+
+
+    const [editorValue, setEditorValue] = React.useState([{ type: "paragraph", children: [{ text: "" }] }]);
+
 
     const handleDateChangeStart = (date: Date | null) => {
         console.log(date);
@@ -69,7 +86,7 @@ const CreateTrail = () => {
                     variant="h3"
                     gutterBottom
                     className={classes.pageTitle}>
-                    Create new trail
+                    New wanderfull hike
                 </Typography>
                 <Paper elevation={0} className={classes.blockBaseInfo}>
                     <Container>
@@ -83,7 +100,7 @@ const CreateTrail = () => {
                                 handleDateChangeStart={handleDateChangeStart}
                                 handleDateChangeFinish={handleDateChangeFinish}
                             />
-                            <TextField id="standard-basic" label="Title" className={classes.trailName} />
+                            <TextField id="standard-basic" label="Title" className={classes.hikeName} />
                             <TextField
                                 className={classes.shortDiscription}
                                 id="standard-textarea"
@@ -91,6 +108,9 @@ const CreateTrail = () => {
                                 placeholder="Short description"
                                 multiline
                             />
+                            <Box className={classes.textEditorQ}>
+                                <EditorQ />
+                            </Box>
                         </Grid>
                     </Container>
                 </Paper>
@@ -114,4 +134,4 @@ const CreateTrail = () => {
     )
 }
 
-export default CreateTrail;
+export default CreateHike;

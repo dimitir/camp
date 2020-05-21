@@ -32,14 +32,14 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: Pro
 
                         <Link
                             variant={linkVariant}
-                            color="textPrimary" href="#"
+                            color="textPrimary" href="/hikes/create"
                             className={style.link}>
                             Hikes
                         </Link>
                         <Link
                             variant={linkVariant}
                             color="textPrimary"
-                            href="/trails/create"
+                            href="#"
                             className={style.link}>
                             Trails
                        </Link>
