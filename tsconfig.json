@@ -17,4 +17,5 @@
         "./src/**/*",
         "src/server/env.ts"
     ],
+    "files": ["custom.d.ts"],
 }

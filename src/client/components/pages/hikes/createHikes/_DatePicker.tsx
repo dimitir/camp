@@ -21,7 +21,7 @@ const _DatePicker = ({ selectedDateStart, selectedDateFinish, handleDateChangeSt
     return (
         <>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container justify="center">
+                <Grid container justify="space-between" alignItems='center'>
                     <KeyboardDatePicker
                         disableToolbar
                         variant="inline"
@@ -35,7 +35,7 @@ const _DatePicker = ({ selectedDateStart, selectedDateFinish, handleDateChangeSt
                             'aria-label': 'change date',
                         }}
                     />
-                    <Box mr={2}></Box>
+                    <Box ><span>Going</span></Box>
                     <KeyboardDatePicker
                         key="finishTrail"
                         disableToolbar

@@ -1,5 +1,5 @@
 import React from 'react';
-import 'react-quill/dist/quill.snow.css';
+import './quill.snow.custom.css';
 import ReactQuill, { Quill } from 'react-quill';
 import quillEmoji from "quill-emoji";
 import "quill-emoji/dist/quill-emoji.css";
@@ -25,18 +25,14 @@ const toolbarOptions = {
 
         [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'align': [] }],
 
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        ['link', 'image', 'video'],
 
-        ['image', 'link',],
-
-        ['emoji'],
-
-        ['clean'],
+        [{ 'color': [] }, { 'background': [] }, 'emoji'],          // dropdown with defaults from theme
       ],
     handlers: { 'emoji': function () { } },
   },
   'emoji-toolbar': true,
-  'emoji-textarea': true,
+  'emoji-textarea': false,
   'emoji-shortname': true,                         // remove formatting button
 
 };
@@ -50,8 +46,7 @@ const formats = [
   'clean',
 ];
 
-function MyComponent() {
-  const [value, setValue] = React.useState('');
+const EditorText = ({ value, setValue }) => {
 
   return (
     <ReactQuill
@@ -66,7 +61,7 @@ function MyComponent() {
 }
 
 
-export default MyComponent;
+export default EditorText;
 
 
 // formats={formats}

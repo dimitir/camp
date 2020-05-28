@@ -108,10 +108,26 @@ module.exports = (env, argv) => {
           },
         ]
       },
+     /*  {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'url-loader'],
+      }, */
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(png|woff|woff2|eot|ttf)$/,
         loader: 'url-loader?limit=100000'
-      }
+      },
+         {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: 'svg-url-loader',
+              options: {
+                limit: 10000,
+                name: '[path][name].[ext]',
+              },
+            },
+          ],
+        }, 
       ]
     },
     resolve: {

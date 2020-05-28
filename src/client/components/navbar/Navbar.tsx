@@ -26,7 +26,7 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: Pro
             <AppBar className={style.appBar} position="static" color="default" elevation={0} >
                 <Toolbar className={style.toolBar} >
                     <Typography variant="h6" color="inherit" noWrap  >
-                        GoHome
+                        Kettle
                    </Typography>
                     <div className={style.novLinks}>
 
