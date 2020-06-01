@@ -21,11 +21,10 @@ const ModalSingUpAll: React.FC<PropsTypesModalSingEmail> = ({ open, handleClose,
         email: yup.string().email().required(),
     });
 
-    const { register, handleSubmit, errors, reset } = useForm({
-        validationSchema: schema
-    });
+    const { register, handleSubmit, errors, reset } = useForm();
 
     const onSubmit = handleSubmit(({ email }) => {
+
         console.log(email);
         handleSendEmail(email);
         reset();

@@ -52,5 +52,23 @@ export interface TypeSetUserData {
     user: any;
 }
 
+
+interface Ihike {
+    name: String;
+    start: Date;
+    finish: Date;
+    subscription: String;
+    discription: any;
+    isVisible: Boolean;
+    discriptionTeam: any;
+}
+
+export interface TypeAddHike {
+    type: string;
+    hike: Ihike;
+}
+
+
+
 export interface ActionTypeAuth extends TypeSetUserData, TypeSendEmail { };
 

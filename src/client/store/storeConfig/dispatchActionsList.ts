@@ -11,6 +11,7 @@ const actionsApp = keyMirror({
     SET_AUTH_USER_DATA: true,
     USER_LOGOUT: true,
     MANAGE_CALL_BACK_EMAIL_AUTH: true,
+    ADD_HIKE: true,
 });
 
 export default actionsApp;

@@ -1,11 +1,12 @@
 import { connect, ConnectedProps } from 'react-redux';
 // import { RootStateType } from '../../store/storeConfig/rootReducers';
 import { Dispatch } from 'redux';
-// import { } from '../../store/trails/actions';
+import { addHike } from '../../../../store/hikes/actions';
 import CreateHike from './CreateHike';
 
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+    addHike: (hike: any) => dispatch(addHike(hike)),
 
 })
 
