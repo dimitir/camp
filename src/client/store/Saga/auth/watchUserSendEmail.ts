@@ -1,6 +1,7 @@
 import { take, call, put } from 'redux-saga/effects';
 import actionsList from '../../storeConfig/dispatchActionsList';
 import modalName from '../../modals/modalNamesList';
+import env from '../../../../env';
 
 async function fetchEmail(email: string) {
     const data = {
@@ -9,7 +10,7 @@ async function fetchEmail(email: string) {
 
     let response, text;
     try {
-        response = await fetch('api/auth/loginEmail', {
+        response = await fetch(`${env.host}/auth/loginEmail`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -41,8 +42,8 @@ export default function* watchUserSendEmail() {
                 yield put({ type: actionsList.SHOW_MODAL, modalType: modalName.CHECK_YOU_INBOX })
             }
         }
-        catch (err) {
-            console.error(err);
+        catch {
+            new Error('watchUserSendEmail');
         }
     }
 }

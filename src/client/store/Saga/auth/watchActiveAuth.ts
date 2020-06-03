@@ -1,5 +1,4 @@
 import { take, call, put } from 'redux-saga/effects';
-import jwt from 'jsonwebtoken';
 import actionsList from '../../storeConfig/dispatchActionsList';
 import env from '../../../../env';
 

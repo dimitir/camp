@@ -46,7 +46,7 @@ const formats = [
   'clean',
 ];
 
-const EditorText = ({ value, setValue }) => {
+const EditorText = ({ value, setValue, placeholder }) => {
 
   return (
     <ReactQuill
@@ -54,7 +54,7 @@ const EditorText = ({ value, setValue }) => {
       value={value}
       onChange={setValue}
       modules={toolbarOptions}
-      placeholder={'Compose an epic...'}
+      placeholder={placeholder}
 
     />
   );

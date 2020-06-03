@@ -6,7 +6,7 @@ import {
 } from './utilities';
 import passport from 'passport';
 
-var router = express.Router();
+const router = express.Router();
 const jsonParser = express.json();
 
 

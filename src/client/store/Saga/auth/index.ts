@@ -10,5 +10,5 @@ export {
     watchFirstAuthConnect,
     watchSingUpGoogle,
     watchSingUpFacebook,
-    watchActiveAuth
+    watchActiveAuth,
 }

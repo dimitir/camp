@@ -35,7 +35,7 @@ const _DatePicker = ({ selectedDateStart, selectedDateFinish, handleDateChangeSt
                             'aria-label': 'change date',
                         }}
                     />
-                    <Box ><span>Going</span></Box>
+                    <Box ><span></span></Box>
                     <KeyboardDatePicker
                         key="finishTrail"
                         disableToolbar

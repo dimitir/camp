@@ -60,7 +60,7 @@ interface Ihike {
     subscription: String;
     discription: any;
     isVisible: Boolean;
-    discriptionTeam: any;
+    teamInfo: any;
 }
 
 export interface TypeAddHike {
