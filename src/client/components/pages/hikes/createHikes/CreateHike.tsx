@@ -16,7 +16,13 @@ import Link from '@material-ui/core/Link';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
-
+import Radio, { RadioProps } from '@material-ui/core/Radio';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import Region from './_Region';
+import RegionCoun from './_RegionCoun';
 // import 'date-fns';
 import * as yup from "yup";
 import ReactHtmlParser, { processNodes, convertNodeToElement } from 'react-html-parser';
@@ -76,7 +82,7 @@ const jssStyle = (theme: Theme) =>
             marginTop: '7px',
         },
         textEditor: {
-            marginTop: '80px',
+            marginTop: '110px',
         },
         textEditorTeam: {
             marginTop: '40px',
@@ -109,11 +115,18 @@ const jssStyle = (theme: Theme) =>
             }
         },
         visibilityCheck: {
-            marginTop: '80px',
+            marginTop: '30px',
             marginBottim: '20px',
         },
         visabilityCheckLabel: {
             fontWeight: 500,
+            marginBottom: '-2px'
+        },
+        ecoCheck: {
+            marginBottom: '-15px'
+
+        },
+        ecoCheckLabel: {
             marginBottom: '-2px'
         },
         buttonCreate: {
@@ -124,6 +137,27 @@ const jssStyle = (theme: Theme) =>
             // marginTop: '80px',
             marginBottom: '150px'
         },
+        difficultyTitle: {
+            marginRight: '10px'
+        },
+        difficulty: {
+            maxWidth: '150px',
+            width: '100%',
+        },
+        diffTypeEcoLine: {
+            marginTop: '70px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        },
+
+        regionLine: {
+            marginTop: '5px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        }
     })
 
 const useStyles = makeStyles(jssStyle);
@@ -131,7 +165,7 @@ const useStyles = makeStyles(jssStyle);
 
 
 
-const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike }: TypeProps_CreateHike) => {
+const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user }: TypeProps_CreateHike) => {
 
     const schema = yup.object().shape({
         name: yup.string().required(),
@@ -151,6 +185,10 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike }: TypeProps_Creat
     const [valueTextEditorTeam, setValueTextEditorTeam] = useState('');
 
 
+    const [difficulty, setDifficulty] = React.useState('');
+
+
+
     const encodeHtmltoUtf = (str: string) => {
         return new TextEncoder().encode(valueTextEditor)
     }
@@ -160,10 +198,13 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike }: TypeProps_Creat
 
 
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleVisible = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
     };
 
+    const handleDifficulty = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setDifficulty(event.target.value as string);
+    };
 
     const handleDateChangeStart = (date: Date | null) => {
         setSelectedDateStart(date);
@@ -172,21 +213,20 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike }: TypeProps_Creat
         setSelectedDateFinish(date);
     };
 
-    const onSubmit = handleSubmit(({ hikeName, subscription }) => {
+    const onSubmit = handleSubmit(({ name, subscription }) => {
 
-        console.log(hikeName);
         const hike = {
-            name: hikeName,
+            name: name,
             start: selectedDateFinish,
             finish: selectedDateFinish,
             subscription: subscription,
             discription: encodeHtmltoUtf(valueTextEditor),
-            isVisible: checked,
+            visible: checked,
             teamInfo: encodeHtmltoUtf(valueTextEditorTeam),
+            leaderEmail: user.email
         }
         console.log(hike);
         addHike(hike);
-        reset();
     });
 
     const classes = useStyles();
@@ -215,6 +255,51 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike }: TypeProps_Creat
 
                                 <_DatePicker selectedDateStart={selectedDateStart} selectedDateFinish={selectedDateFinish}
                                     handleDateChangeStart={handleDateChangeStart} handleDateChangeFinish={handleDateChangeFinish} />
+                                <div className={classes.regionLine}>
+                                    {/* <Region /> */}
+                                    <RegionCoun />
+                                </div>
+
+
+
+
+                                <div className={classes.diffTypeEcoLine}>
+
+                                    <FormControlLabel className={classes.ecoCheck}
+                                        label={<Typography variant="subtitle1" gutterBottom className={classes.ecoCheckLabel} >With eco activity</Typography>}
+                                        control={<Checkbox checked={checked} onChange={handleVisible} name="checkedA" />} />
+
+
+                                    <FormControl className={classes.difficulty}>
+                                        <InputLabel id="demo-simple-select-label">Difficulty</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            value={difficulty}
+                                            onChange={handleDifficulty}
+                                        >
+                                            <MenuItem value={'Easy'}>Easy</MenuItem>
+                                            <MenuItem value={'Middle'}>Middle</MenuItem>
+                                            <MenuItem value={'Hard'}>Hard</MenuItem>
+                                        </Select>
+                                    </FormControl>
+
+                                    <FormControl className={classes.difficulty}>
+                                        <InputLabel id="activity-type-select-label">Type of hike</InputLabel>
+                                        <Select
+                                            labelId="activity-type-select-label"
+                                            id="activity-type-select"
+                                            value={difficulty}
+                                            onChange={handleDifficulty}
+                                        >
+                                            <MenuItem value={'Foot'}>Foot</MenuItem>
+                                            <MenuItem value={'Water'}>Water</MenuItem>
+                                            <MenuItem value={'Cуcle'}>Cуcle</MenuItem>
+                                        </Select>
+                                    </FormControl>
+
+
+                                </div>
 
                                 <TextField
                                     name='subscription'
@@ -226,15 +311,14 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike }: TypeProps_Creat
                                 />
                                 {errors.subscription && <p>{(errors.subscription as any)?.message}</p>}
 
-
                                 <Box className={classes.textEditor}>
                                     <Editor value={valueTextEditor} setValue={setValueTextEditor} placeholder='Description' />
                                 </Box>
 
 
                                 <FormControlLabel className={classes.visibilityCheck}
-                                    label={<Typography variant="subtitle1" gutterBottom className={classes.visabilityCheckLabel} >Visible hike page for everyone</Typography>}
-                                    control={<Checkbox checked={checked} onChange={handleChange} name="checkedA" />} />
+                                    label={<Typography variant="body2" gutterBottom className={classes.visabilityCheckLabel} >Visible hike page for everyone</Typography>}
+                                    control={<Checkbox checked={checked} onChange={handleVisible} name="checkedA" />} />
 
 
                                 <Typography variant="body1" gutterBottom className='' >

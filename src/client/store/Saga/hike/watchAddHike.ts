@@ -9,7 +9,7 @@ async function fetchAddHike(hike: any) {
     const { data } = await axios({
         url: `${env.host}/hike/add`,
         method: 'post',
-        data: hike,
+        data: { hike: hike },
     });
     console.log(data); // { access_token, token_type, expires_in }
     return data.access_token;

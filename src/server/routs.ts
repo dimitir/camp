@@ -5,8 +5,8 @@ import { baseApiUrl } from '../env';
 
 
 const routsApp = (app: Application) => {
-    app.use(`${baseApiUrl}/hike`, hikeRoutes);
     app.use(`${baseApiUrl}/auth`, authRoutes);
+    app.use(`${baseApiUrl}/hike`, hikeRoutes);
 }
 
 export default routsApp;

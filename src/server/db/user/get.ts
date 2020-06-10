@@ -1,15 +1,22 @@
-import { UserModel } from './schema';
+import { UserSchema } from './schema';
 
 const getUserByEmail = async (userEmail: string) => {
-    return await UserModel.findOne({ email: userEmail })
+    return await UserSchema.findOne({ email: userEmail })
 };
 
 
-const getUserByIdAndUpdate = async (id: string, newJwt: string) => {
-    const userData = await UserModel.findOneAndUpdate({ _id: id }, { jwt: newJwt, auth: true });
+
+
+const getUserByEmailAndUpdateLead = async ({ email, hikesLead, }: { email: string, hikesLead: Array<String> }) => {
+    const userData = await UserSchema.findOneAndUpdate({ email: email }, { hikesLead: hikesLead });
     return userData;
 }
 
+
+const getUserByIdAndUpdate = async (id: string, jwt: string) => {
+    const userData = await UserSchema.findOneAndUpdate({ _id: id }, { jwt: jwt, auth: true });
+    return userData;
+}
 
 
 interface IgetUserByIdAndUpdateProvider {
@@ -24,7 +31,7 @@ interface IgetUserByIdAndUpdateProvider {
 }
 const getUserByIdAndUpdateFromProvider =
     async ({ id, jwt, provider, providerId, firstName, lastName, picture }: IgetUserByIdAndUpdateProvider) => {
-        const userData = await UserModel.findOneAndUpdate({ _id: id }, {
+        const userData = await UserSchema.findOneAndUpdate({ _id: id }, {
             $set: {
                 jwt: jwt,
                 auth: true,
@@ -42,8 +49,8 @@ const getUserByIdAndUpdateFromProvider =
 
 const getUserByProviderId = async (id: string) => {
     console.log('getUserByProviderId');
-    return await UserModel.findOne({ providerId: id })
+    return await UserSchema.findOne({ providerId: id })
 }
 
-export { getUserByEmail, getUserByIdAndUpdate, getUserByProviderId, getUserByIdAndUpdateFromProvider };
+export { getUserByEmail, getUserByIdAndUpdate, getUserByProviderId, getUserByIdAndUpdateFromProvider, getUserByEmailAndUpdateLead };
 

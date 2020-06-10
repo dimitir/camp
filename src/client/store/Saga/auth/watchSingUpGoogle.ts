@@ -28,6 +28,7 @@ async function fetchTokenIdFromGoogle(code: string) {
 
 async function fetchToBackToSetJWT(tokenId: string) {
     console.log('fetchToBackToSetJWT');
+
     const options = {
         method: 'POST',
         body: JSON.stringify({ tokenId: tokenId }),
@@ -37,7 +38,7 @@ async function fetchToBackToSetJWT(tokenId: string) {
     };
 
     let response, dataRespond, text;
-    try { response = await fetch('api/auth/google', options) }
+    try { response = await fetch(`${env.host}/auth/google`, options) }
     catch (err) { new Error('fetch auth singup is failed'); }
 
     if (response) {
@@ -62,7 +63,10 @@ async function fetchToBackToSetJWT(tokenId: string) {
 export default function* watchSingUpGoogle() {
     while (true) {
         try {
-            const { code } = yield take(actionsList.SEND_AUTH_CODE_TO_GOOGLE)
+            const { code } = yield take(actionsList.SEND_AUTH_CODE_TO_GOOGLE);
+            console.group('SEND_AUTH_CODE_TO_GOOGLE');
+            console.log(code);
+            console.groupEnd();
             const tokenId = yield call(fetchTokenIdFromGoogle, code);
             const user = yield call(fetchToBackToSetJWT, tokenId);
             yield put({ type: actionsList.SET_AUTH_USER_DATA, user });

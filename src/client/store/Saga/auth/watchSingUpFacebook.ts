@@ -31,7 +31,7 @@ async function fetchToBackToSetJWT(accessToken: string) {
     };
 
     let response, dataRespond, text;
-    try { response = await fetch('api/auth/facebook', options) }
+    try { response = await fetch(`${env.host}/auth/facebook`, options) }
     catch (err) { new Error('fetch auth singup is failed'); }
 
     if (response) {

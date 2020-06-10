@@ -45,6 +45,10 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
     const handleLogin = () => {
         if (location.pathname) {
             localStorage.setItem('lastLocation', location.pathname);
+            console.group('lastLocation');
+            console.log(localStorage.getItem('lastLocation'));
+            console.log(location.pathname);
+            console.groupEnd();
         }
         showModal(modalName.SING_UP_ALL)
     }

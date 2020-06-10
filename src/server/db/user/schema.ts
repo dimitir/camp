@@ -10,7 +10,9 @@ const User = new mongoose.Schema({
     firstName: String,
     lastName: String,
     picture: String,
+    hikesLead: Array,
+
 });
 
-export const UserModel = mongoose.model("goHome", User);
+export const UserSchema = mongoose.model("user", User);
 

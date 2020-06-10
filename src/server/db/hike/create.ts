@@ -1,53 +1,18 @@
-import { UserModel } from './schema';
-import { TypeCreateUserProvider } from './Types';
+import { HikeSchema } from './schema';
+import { TypeHike } from './Types';
 
-const createUser = async (
-    token: string,
-    email: string,
-) => {
-    const userAuthData = {
-        jwt: token,
-        email: email,
-        auth: false,
-        provider: 'email',
-        providerId: null,
-        firstName: null,
-        lastName: null,
-        picture: null,
-    };
-    const authFirst = await UserModel.create(userAuthData);
+
+const createHike = async (hike: TypeHike) => {
+    console.log('hikeCreate');
+    console.log(hike);
+    const authFirst = await HikeSchema.create(hike);
     return await authFirst.save();
 }
 
 
-const createUserFromProvider = async ({
-    jwt,
-    email,
-    provider,
-    providerId,
-    firstName,
-    lastName,
-    picture,
-}: TypeCreateUserProvider
-) => {
-    const userAuthData = {
-        jwt,
-        email,
-        auth: true,
-        provider,
-        providerId,
-        firstName,
-        lastName,
-        picture,
-    };
-    const authFirst = await UserModel.create(userAuthData);
-    const user = await authFirst.save();
-    console.log('user');
-    console.log(user);
-    return user;
-}
+console.log('AddHike');
+console.log(createHike);
 
 export {
-    createUser,
-    createUserFromProvider
+    createHike,
 }

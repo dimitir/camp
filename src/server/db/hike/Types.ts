@@ -1,32 +1,17 @@
-import { Document } from 'mongoose';
 
-interface Iproviders {
-    provider: String,
-    providerId: String
+
+export interface TypeHike {
+    name: string;
+    start: Date;
+    finish: Date;
+    subscription: string;
+    discription: string;
+    visible: string;
+    teamInfo: string;
+    leaderEmail: string;
 }
 
-/* 
-export interface IUser extends Document {
-    email: string;
-    jwt: string;
-    auth: boolean;
-    providers: [{
-        provider: string,
-        providerId: string,
-        firstName: string,
-        lastName: string,
-        displayName: string,
-    }];
-} */
 
-
-export interface TypeCreateUserProvider {
-    jwt: string;
-    email: string;
-    provider: string;
-    providerId: string;
-    firstName: string;
-    lastName: string;
-    picture?: string;
-    locale?: string;
+export interface TypeHikeWrapper {
+    hike: TypeHike
 }

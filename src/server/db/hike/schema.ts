@@ -10,8 +10,17 @@ const Hike = new mongoose.Schema({
     providerId: String,
     discription: Array,
     teamInfo: Array,
-    isVisible: Boolean,
+    visible: Boolean,
+    participans: Array,
+    leaderEmail: String,
 });
 
-export const UserModel = mongoose.model("goHome", Hike);
+export const HikeSchema = mongoose.model("hike", Hike);
 
+/* export interface IHeroModel extends mongoose.Document {
+  name: string;
+  power: string;
+  amountPeopleSaved: number;
+  createdAt: Date;
+  modifiedAt: Date;
+} */

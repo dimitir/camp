@@ -1,5 +1,5 @@
 import { createUser, createUserFromProvider } from './create';
-import { getUserByEmail, getUserByIdAndUpdate, getUserByProviderId, getUserByIdAndUpdateFromProvider } from './get';
+import { getUserByEmail, getUserByIdAndUpdate, getUserByProviderId, getUserByIdAndUpdateFromProvider, getUserByEmailAndUpdateLead } from './get';
 
 export {
     createUser,
@@ -9,4 +9,7 @@ export {
     getUserByIdAndUpdate,
     getUserByIdAndUpdateFromProvider,
     getUserByProviderId,
+
+    getUserByEmailAndUpdateLead,
+
 }

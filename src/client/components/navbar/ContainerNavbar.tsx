@@ -8,17 +8,17 @@ import { userLogout } from '../../store/auth/actions';
 
 
 
-const MapStateToProps = (state: RootStateType) => ({
+const mapStateToProps = (state: RootStateType) => ({
     user: state.user.user
 })
 
-const MapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
     showModal: (name: string) => dispatch(showModal(name)),
     userLogout: () => dispatch(userLogout())
 });
 
 
-const connector = connect(MapStateToProps, MapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 
 export type PropTypes_Navbar = ConnectedProps<typeof connector>;

@@ -8,10 +8,14 @@ const CallBackHendler: React.FC<PropsTypes_CallBack> = ({ sendCodeToGoogle }: Pr
     const history = useHistory();
     const location = useLocation();
     const parsed = queryString.parse(location.search);
-    console.log(parsed);
+   
 
     const backToLastLocation = () => {
         const lastLocation = localStorage.getItem('lastLocation');
+        console.group('auth callback google');
+        console.log(parsed);
+        console.log(lastLocation);
+        console.groupEnd();
         const code = parsed.code;
         sendCodeToGoogle((code as string));
         history.push((lastLocation as string));
