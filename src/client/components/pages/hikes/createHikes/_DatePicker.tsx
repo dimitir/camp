@@ -8,35 +8,39 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import useStyle from './CreateHike_style';
+
+
 
 interface I_DatePicker {
-    selectedDateStart: Date | null;
-    selectedDateFinish: Date | null;
-    handleDateChangeStart(date: Date | null): void;
-    handleDateChangeFinish(date: Date | null): void;
+    dateStart: Date | null;
+    dateFinish: Date | null;
+    handleDateStart(date: Date | null): void;
+    handleDateFinish(date: Date | null): void;
 }
 
-const _DatePicker = ({ selectedDateStart, selectedDateFinish, handleDateChangeStart, handleDateChangeFinish }: I_DatePicker) => {
-
+const _DatePicker = ({ dateStart, dateFinish, handleDateStart, handleDateFinish }: I_DatePicker) => {
+    const classes = useStyle();
     return (
         <>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container justify="space-between" alignItems='center'>
                     <KeyboardDatePicker
+                        className={classes.datePicker}
                         disableToolbar
                         variant="inline"
                         format="dd/MM/yyyy"
                         margin="normal"
                         id="date-picker-inline-start"
                         label="Start"
-                        value={selectedDateStart}
-                        onChange={handleDateChangeStart}
+                        value={dateStart}
+                        onChange={handleDateStart}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
                     />
-                    <Box ><span></span></Box>
                     <KeyboardDatePicker
+                        className={classes.datePicker}
                         key="finishTrail"
                         disableToolbar
                         variant="inline"
@@ -44,8 +48,8 @@ const _DatePicker = ({ selectedDateStart, selectedDateFinish, handleDateChangeSt
                         margin="normal"
                         id="date-picker-inline-finish"
                         label="Finish"
-                        value={selectedDateFinish}
-                        onChange={handleDateChangeFinish}
+                        value={dateFinish}
+                        onChange={handleDateFinish}
                         KeyboardButtonProps={{
                             'aria-label': 'change date',
                         }}
