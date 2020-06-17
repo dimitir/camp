@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -20,15 +21,11 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import Region from './_Region';
 import RegionCountry from './_RegionCountry';
-// import 'date-fns';
+import 'date-fns';
+
 import * as yup from "yup";
 import ReactHtmlParser, { processNodes, convertNodeToElement } from 'react-html-parser';
-
-
-import IconFlag from './IconFlag';
-import SleepingBag from './SleepingBag';
 
 import _DatePicker from './_DatePicker';
 import Editor from '../../_tools/textEditor/Editor';
@@ -39,6 +36,15 @@ import TeamInformaion from './_TeamInformaion';
 import EcoTypeDifficultLine from './_EcoTypeDifficultLine';
 
 
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+
+
+
 
 
 const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user }: TypeProps_CreateHike) => {
@@ -46,19 +52,24 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user }: TypeProps
     const schema = yup.object().shape({
         name: yup.string().required(),
         subscription: yup.string().required(),
+        startDate: yup.date().required(),
+        finishDate: yup.date().required(),
+        diff: yup.string().required(),
+        typeHike: yup.string().required(),
+        country: yup.string().required(),
+        region: yup.string().required(),
     });
 
-    const { register, handleSubmit, errors, reset } = useForm({
+    const { register, handleSubmit, errors, reset, control, setValue } = useForm({
         validationSchema: schema
     });
 
-    const [dateStart, setDateStart] = useState<Date | null>(new Date());
-    const [dateFinish, setDateFinish] = useState<Date | null>(new Date());
-    const [checked, setChecked] = useState(true);
+
+    const [visible, setVisible] = useState(true);
     const [editorDesctiption, setEditorDesctiption] = useState('');
     const [editorTeam, setEditorTeam] = useState('');
-    const [difficulty, setDifficulty] = React.useState('');
-    const [typeHike, setTypeHike] = React.useState('');
+    const [valueCountry, setValueCountry] = React.useState<string | null>(null);
+    const [valueRegion, setValueRegion] = React.useState<string | null>(null);
 
     const encodeHtmltoUtf = (str: string) => {
         return new TextEncoder().encode(editorDesctiption)
@@ -68,36 +79,34 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user }: TypeProps
     // var str = new TextDecoder('utf-8').decode(uint8array);
 
     const handleVisible = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(event.target.checked);
+        setVisible(event.target.checked);
     };
 
-    const handleDifficulty = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setDifficulty(event.target.value as string);
-    };
 
-    const handleTypeHike = (event: React.ChangeEvent<{ value: unknown }>) => {
-        setTypeHike(event.target.value as string);
-    };
+    const onSubmit = handleSubmit(({ name, subscription, startDate, finishDate, diff, typeHike, eco, country, region }) => {
+        console.log('startDate');
+        console.log(country);
+        console.log(region);
 
-    const handleDateStart = (date: Date | null) => {
-        setDateStart(date);
-    };
-    const handleDateFinish = (date: Date | null) => {
-        setDateFinish(date);
-    };
-
-    const onSubmit = handleSubmit(({ name, subscription }) => {
-
+        console.log(diff);
+        console.log(typeHike);
+        console.log(eco);
         const hike = {
             name: name,
-            start: dateStart,
-            finish: dateFinish,
+            start: startDate,
+            finish: finishDate,
             subscription: subscription,
             discription: encodeHtmltoUtf(editorDesctiption),
-            visible: checked,
+            visible: visible,
+            eco: eco,
+            difficulty: diff,
+            typeHike: typeHike,
+            region: valueRegion,
+            country: valueCountry,
             teamInfo: encodeHtmltoUtf(editorTeam),
             leaderEmail: user.email
         }
+        console.log('hike');
         console.log(hike);
         addHike(hike);
     });
@@ -122,26 +131,26 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user }: TypeProps
                         <Container>
                             <Grid container direction="column" spacing={4}>
 
-                                <TextField name='name' inputRef={register({ required: true })} id="standard-basic" color="secondary" label="Title" className={classes.hikeName} />
-                                {errors.name && <p>{(errors.name as any)?.message}</p>}
+                                <TextField name='name' inputRef={register({ required: true })} id="standard-basic" color="secondary" label="Title" className={classes.hikeName}
+                                    error={!!errors.name}
+                                    helperText={errors.name && errors.name.message} />
 
-                                <_DatePicker dateStart={dateStart} dateFinish={dateFinish}
-                                    handleDateStart={handleDateStart} handleDateFinish={handleDateFinish} />
+                                <_DatePicker errors={errors} control={control} />
+
                                 <Box className={classes.regionCountryBox}>
-                                    <RegionCountry />
+                                    <RegionCountry setValue={setValue} errors={errors} control={control} valueCountry={valueCountry} valueRegion={valueRegion}
+                                        setValueCountry={setValueCountry} setValueRegion={setValueRegion} />
                                 </Box>
 
 
 
                                 <Box className={classes.EcoTypeDifficultBox}>
-                                    <EcoTypeDifficultLine checked={checked} handleVisible={handleVisible}
-                                        difficulty={difficulty} handleDifficulty={handleDifficulty}
-                                        typeHike={typeHike} handleTypeHike={handleTypeHike} />
+                                    <EcoTypeDifficultLine control={control} errors={errors} />
                                 </Box>
 
                                 <TextField name='subscription' inputRef={register({ required: true })} className={classes.subscription}
-                                    id="standard-textarea" label="Short description" multiline />
-                                {errors.subscription && <p>{(errors.subscription as any)?.message}</p>}
+                                    id="standard-textarea" label="Short description" multiline error={!!errors.subscription}
+                                    helperText={errors.subscription && errors.subscription.message} />
 
 
 
@@ -151,7 +160,7 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user }: TypeProps
 
                                 <FormControlLabel className={classes.visibilityCheck}
                                     label={<Typography variant="body2" gutterBottom className={classes.visabilityCheckLabel} >Visible hike page for everyone</Typography>}
-                                    control={<Checkbox checked={checked} onChange={handleVisible} name="checkedA" />} />
+                                    control={<Checkbox checked={visible} onChange={handleVisible} name="checkedA" />} />
 
                                 <Typography variant="body1" gutterBottom >
                                     Or uncheck and in common list the hike will be absent. For share hike page with your close team, pass them  link below.

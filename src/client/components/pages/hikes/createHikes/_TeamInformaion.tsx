@@ -12,13 +12,13 @@ import useStyles from './CreateHike_style';
 
 interface ITEamInformaion {
     editorTeam: string;
-    setEditorTeam: (value:string) => void
+    setEditorTeam: (value: string) => void
 }
 
 
 
 const TeamInformaion = ({ editorTeam, setEditorTeam }: ITEamInformaion) => {
-
+    console.log('TeamInformaion');
     const classes = useStyles();
 
     const paperElevation = 0;
@@ -55,4 +55,4 @@ const TeamInformaion = ({ editorTeam, setEditorTeam }: ITEamInformaion) => {
 
 
 
-export default TeamInformaion;
+export default React.memo(TeamInformaion);

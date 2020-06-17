@@ -61,7 +61,7 @@ const EditorText = ({ value, setValue, placeholder }) => {
 }
 
 
-export default EditorText;
+export default React.memo(EditorText);
 
 
 // formats={formats}
