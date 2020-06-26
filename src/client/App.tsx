@@ -6,6 +6,7 @@ import MainPageContainer from './components/pages/mainPage/MainPageContainer';
 import ContainerNavbar from './components/navbar/ContainerNavbar';
 import AuthCallback from './components/authFront/AuthCallback';
 import ContainerHikeCreate from './components/pages/hikes/createHikes/ContainerCreateHike';
+import Hikes from './components/pages/hikes/Hikes';
 import ContainerModalsCreator from './components/modals/ContainerModalsCreator';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -24,8 +25,8 @@ export default class App extends Component {
                     <Switch>
                         <Route component={MainPageContainer} path='/' exact />
 
-                        <Route component={ContainerHikeCreate} path='/hikes/create' exact />
 
+                        <Route component={Hikes} path='/hikes' />
                         <Route component={AuthCallback} path='/auth' />
                     </Switch>
                 </Router>

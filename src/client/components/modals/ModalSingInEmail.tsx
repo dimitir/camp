@@ -9,6 +9,7 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+
 import { PropsTypesModalSingEmail } from './ContainerModalsCreator';
 import style from './styleModalCreator.scss';
 import modalNamesList from '../../store/modals/modalNamesList';

@@ -30,7 +30,7 @@ async function fetchToBackToSetJWT(accessToken: string) {
         },
     };
 
-    let response, dataRespond, text;
+    let response, user, text;
     try { response = await fetch(`${env.host}/auth/facebook`, options) }
     catch (err) { new Error('fetch auth singup is failed'); }
 
@@ -38,17 +38,14 @@ async function fetchToBackToSetJWT(accessToken: string) {
         try { text = await response.text(); }
         catch (e) { throw new Error(e) }
 
-        try { dataRespond = JSON.parse(text); }
-        catch { dataRespond = null; }
+        try { user = JSON.parse(text); }
+        catch { user = null; }
     }
 
-    if (dataRespond) {
-        console.log('dataRespond');
-        console.log(dataRespond);
-        localStorage.setItem('token', dataRespond.jwt);
-        localStorage.removeItem('expectFirstAuth');
-        console.log(localStorage.getItem('token'));
-        return dataRespond;
+    if (user) {
+        localStorage.setItem('token', user.jwt);
+        localStorage.setItem('userPic', user.picture);
+        return user;
     } else return null;
 }
 

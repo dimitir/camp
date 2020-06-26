@@ -32,19 +32,15 @@ export interface TypeSendEmail {
 }
 
 
-
-
 export interface TypeSendCodeSocialAuth {
     type: string;
     code: string;
 }
 
-
 const initialState = {
     showModal: false,
     typeModal: ''
 }
-
 
 
 export interface TypeSetUserData {
@@ -53,22 +49,6 @@ export interface TypeSetUserData {
 }
 
 
-interface Ihike {
-    name: String;
-    start: Date;
-    finish: Date;
-    subscription: String;
-    discription: any;
-    isVisible: Boolean;
-    teamInfo: any;
-}
-
-export interface TypeAddHike {
-    type: string;
-    hike: Ihike;
-}
-
 
 
 export interface ActionTypeAuth extends TypeSetUserData, TypeSendEmail { };
-

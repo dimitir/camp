@@ -1,4 +1,4 @@
-import { take, call, put } from 'redux-saga/effects';
+import { take, call, put, select } from 'redux-saga/effects';
 import actionsList from '../../storeConfig/dispatchActionsList';
 import env from '../../../../env';
 
@@ -40,13 +40,16 @@ async function fetchToBackForUser(token: string) {
 export default function* watchActiveAuth() {
     try {
         const token = localStorage.getItem('token');
-        console.log(token);
+        const state = yield select();
+        console.log('watchActiveAuth');
+        console.log(state);
         if (token) {
             let user;
             try {
                 user = yield call(fetchToBackForUser, (token as string));
                 if (user) {
                     yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
+                    localStorage.setItem('userPic', user.picture);
                 }
                 else {
                     throw new Error(' initial user is not get')

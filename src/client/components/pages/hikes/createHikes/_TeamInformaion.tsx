@@ -32,7 +32,7 @@ const TeamInformaion = ({ editorTeam, setEditorTeam }: ITEamInformaion) => {
                     variant="subtitle1"
                     gutterBottom
                     className={classes.pageSubTitle_signature}>
-                    This part of the information will be available to participants after they register for the hike
+                    This part  will be available to participants after they register for the hike
                 </Typography>
             </Grid>
             <Paper elevation={paperElevation} className={classes.blockBaseInfo}>
@@ -40,7 +40,7 @@ const TeamInformaion = ({ editorTeam, setEditorTeam }: ITEamInformaion) => {
                     <Grid container direction="column" spacing={4}>
                         <Box className={classes.textEditorTeam}>
                             <Editor value={editorTeam} setValue={setEditorTeam} placeholder='Description' />
-                            <Typography variant="body2" gutterBottom >
+                            <Typography variant="body2" gutterBottom  className={classes.teamEditorTip}>
                                 *Usually here published viber or telegram link this hike.
                                 links to Google Sheets or other sheets service where divide responsibility
                                 for common things, foods, equipment, places for tents.

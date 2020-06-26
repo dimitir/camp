@@ -24,8 +24,7 @@ async function fetchToBackForUser(token: string) {
 
     try {
         dataRes = JSON.parse(text);
-        console.log('dataRes');
-        console.log(dataRes);
+        
     }
     catch { dataRes = null; }
 
@@ -42,12 +41,11 @@ export default function* watchCallBackEmailAuth() {
     while (true) {
         try {
             const { token } = yield take(actionsList.MANAGE_CALL_BACK_EMAIL_AUTH);
-            console.group('email group');
-            console.log(token);
             const user = yield call(fetchToBackForUser, token);
             if (user) {
                 yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
                 localStorage.setItem('token', user.jwt)
+                localStorage.setItem('userPic', user.picture);
             }
         }
         catch (err) {

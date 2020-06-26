@@ -88,11 +88,6 @@ function CountryRegion({ valueCountry, setValueCountry, valueRegion, setValueReg
   return (
     <>
       <div className={classes.regionLine}>
-
-
-
-
-
         <Autocomplete
           className={classes.countryRegionSelect}
           id="country"
@@ -139,6 +134,8 @@ function CountryRegion({ valueCountry, setValueCountry, valueRegion, setValueReg
                 <TextField
                   {...params}
                   label="Regions"
+                  error={!!errors.region}
+                  helperText={errors.region && errors.region.message}
                 >
                   {getRegions(valueCountry).map(
                     (option: any, index: any) => (

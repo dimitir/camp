@@ -6,7 +6,7 @@ const actionsApp = keyMirror({
     CLOSE_MODAL: true,
 
     CURRENT_USER: true,
-    
+
     LOGIN_SEND_EMAIL: true,
     SEND_AUTH_CODE_TO_GOOGLE: true,
     SEND_AUTH_CODE_TO_FACEBOOK: true,
@@ -15,6 +15,8 @@ const actionsApp = keyMirror({
     MANAGE_CALL_BACK_EMAIL_AUTH: true,
 
     ADD_HIKE: true,
+    HIKE_ADDED: true,
+    HIKES_LIST: true,
 });
 
 export default actionsApp;

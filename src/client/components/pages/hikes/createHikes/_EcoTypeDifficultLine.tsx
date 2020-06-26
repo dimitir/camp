@@ -18,10 +18,6 @@ interface IEcoTypeDifficult {
 
 function EcoTypeDifficultLine({ control, errors }: IEcoTypeDifficult) {
 
-    /* const [eco, setEco] = useState(true);
-    const [difficulty, setDifficulty] = React.useState('');
-    const [typeHike, setTypeHike] = React.useState(''); */
-    
     console.log('EcoTypeDifficultLine');
     const classes = useStyles();
 

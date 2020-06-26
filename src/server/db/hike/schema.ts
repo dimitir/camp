@@ -3,16 +3,20 @@ import mongoose from 'mongoose';
 
 
 const Hike = new mongoose.Schema({
-    name: String,
-    start: Date,
-    finish: Date,
-    subscription: String,
-    providerId: String,
-    discription: Array,
-    teamInfo: Array,
-    visible: Boolean,
-    participans: Array,
-    leaderEmail: String,
+  name: String,
+  start: Date,
+  finish: Date,
+  subscription: String,
+  discription: Array,
+  eco: String,
+  difficulty: String,
+  typeHike: String,
+  country: String,
+  region: String,
+  openEvent: Boolean,
+  teamInfo: Array,
+  participans: Array,
+  leaderEmail: String,
 });
 
 export const HikeSchema = mongoose.model("hike", Hike);
@@ -24,3 +28,4 @@ export const HikeSchema = mongoose.model("hike", Hike);
   createdAt: Date;
   modifiedAt: Date;
 } */
+

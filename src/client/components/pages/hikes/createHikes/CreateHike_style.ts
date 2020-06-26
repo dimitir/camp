@@ -23,17 +23,17 @@ const jssStyle = (theme: Theme) =>
         },
         pageSubTitle_signature: {
             textAlign: 'center',
-            maxWidth: '500px',
+            maxWidth: '550px',
             // marginBottom: '20px',
         },
         page: {
-            maxWidth: '750px',
+            maxWidth: '800px',
             margin: 'auto',
         },
         blockBaseInfo: {
             hight: '400px',
             marginBottom: '120px',
-            marginTop: '40px',
+            // marginTop: '40px',
             padding: '30px',
 
         },
@@ -41,13 +41,17 @@ const jssStyle = (theme: Theme) =>
             marginTop: '20px',
         },
         subscription: {
-            marginTop: '5px',
+             marginTop: '3px',
         },
+
         textEditorDiscription: {
-            marginTop: '110px',
+            marginTop: '75px',
         },
         textEditorTeam: {
             marginTop: '40px',
+        },
+        teamEditorTip: {
+            marginTop: '10px',
         },
         titleBlock: {
             textAlign: 'center'
@@ -76,11 +80,11 @@ const jssStyle = (theme: Theme) =>
                 strokeWidth: '10px',
             }
         },
-        visibilityCheck: {
-            marginTop: '30px',
-            marginBottim: '20px',
+        openEventBox: {
+            marginTop: '70px',
         },
-        visabilityCheckLabel: {
+        // marginBottim: '20px',
+        openEventLabel: {
             fontWeight: 500,
             marginBottom: '-2px'
         },
@@ -103,8 +107,8 @@ const jssStyle = (theme: Theme) =>
             marginRight: '10px'
         },
         difficulty: {
-            maxWidth: '150px',
-            width: '100%',
+            // maxWidth: '150px',
+            width: '32%',
         },
 
         regionCountryBox: {
@@ -121,8 +125,8 @@ const jssStyle = (theme: Theme) =>
             width: '48%'
         },
 
-        EcoTypeDifficultBox: {
-            marginTop: '70px',
+        ecoTypeDifficultBox: {
+            marginTop: '50px',
         },
         diffTypeEcoLine: {
             display: 'flex',

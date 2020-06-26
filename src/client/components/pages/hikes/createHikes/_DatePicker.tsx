@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Controller } from 'react-hook-form';
+import 'date-fns';
 
 import DateFnsUtils from '@date-io/date-fns';
 import {

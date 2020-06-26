@@ -3,7 +3,6 @@ import actionsList from '../../storeConfig/dispatchActionsList';
 import axios from 'axios';
 import env from '../../../../env';
 
-
 async function fetchAddHike(hike: any) {
     console.log('fetch');
     const { data } = await axios({
@@ -11,8 +10,7 @@ async function fetchAddHike(hike: any) {
         method: 'post',
         data: { hike: hike },
     });
-    console.log(data); // { access_token, token_type, expires_in }
-    return data.access_token;
+    return data
 };
 
 
@@ -23,7 +21,12 @@ export default function* watchAddHike() {
         try {
             const { hike } = yield take(actionsList.ADD_HIKE);
             console.log(hike);
-            yield call(fetchAddHike, hike);
+            const data = yield call(fetchAddHike, hike);
+            console.log(data);
+            if (data == 'OK') {
+                console.log('hello ok');
+                yield put({ type: actionsList.HIKE_ADDED, added: true })
+            }
         }
         catch{ new Error('watchAddHike') }
     }

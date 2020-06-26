@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
+
     const classes = useStyles();
     const location = useLocation();
 
@@ -65,12 +66,13 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('userPic');
         userLogout()
         handleClose();
     }
 
 
-    let imgUserSrc;
+    let imgUserSrc: string;
     try {
         if (user.picture) {
             imgUserSrc = user.picture;
@@ -83,9 +85,14 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
         throw new Error('user is absent');
     }
 
+    const token = localStorage.getItem('token');
+    let userPic = localStorage.getItem('userPic')
+    if (!userPic) {
+        userPic = `https://robohash.org/picture.png`;
+    }
+
 
     if (user.auth) {
-
         return (
             <>
                 <Avatar className={classes.userImg} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} alt={user.firstName} src={imgUserSrc} />
@@ -112,9 +119,15 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
-
             </>
 
+        )
+    }
+    else if (token) {
+        return (
+            <>
+                <Avatar className={classes.userImg} src={userPic} />
+            </>
         )
     }
     else {
@@ -123,12 +136,9 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
                 <ExitToAppIcon
                     className={style.buttonLogin}
                     onClick={() => handleLogin()} />
-
             </>
         )
     }
-
 }
 
-
-export default _Login
+export default _Login;

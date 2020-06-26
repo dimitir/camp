@@ -32,7 +32,7 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: Pro
 
                         <Link
                             variant={linkVariant}
-                            color="textPrimary" href="/hikes/create"
+                            color="textPrimary" href="/hikes/list"
                             className={style.link}>
                             Hikes
                         </Link>
@@ -56,11 +56,13 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: Pro
                             We
                         </Link>
                     </div>
-                    <_Login
-                        showModal={showModal}
-                        user={user}
-                        userLogout={userLogout}
-                    />
+                    <div className={style.navbarLogin}>
+                        <_Login
+                            showModal={showModal}
+                            user={user}
+                            userLogout={userLogout}
+                        />
+                    </div>
 
                 </Toolbar>
             </AppBar>

@@ -4,6 +4,7 @@ interface CssExports {
   'appBar': string;
   'buttonLogin': string;
   'link': string;
+  'navbarLogin': string;
   'novLinks': string;
   'toolBar': string;
 }

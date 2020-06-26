@@ -1,6 +1,6 @@
 import { put, takeEvery, all, take, select, fork, call } from 'redux-saga/effects';
 import { watchUserSendEmail, watchFirstAuthConnect, watchSingUpGoogle, watchSingUpFacebook, watchActiveAuth } from './auth';
-import { watchAddHike } from './hike';
+import { watchAddHike, watchHikesList } from './hike';
 
 export default function* rootSaga() {
     yield all([
@@ -10,6 +10,7 @@ export default function* rootSaga() {
         watchSingUpFacebook(),
         watchActiveAuth(),
 
-        watchAddHike()
+        watchAddHike(),
+        watchHikesList()
     ])
 }

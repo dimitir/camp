@@ -37,7 +37,7 @@ async function fetchToBackToSetJWT(tokenId: string) {
         },
     };
 
-    let response, dataRespond, text;
+    let response, user, text;
     try { response = await fetch(`${env.host}/auth/google`, options) }
     catch (err) { new Error('fetch auth singup is failed'); }
 
@@ -45,17 +45,14 @@ async function fetchToBackToSetJWT(tokenId: string) {
         try { text = await response.text(); }
         catch (e) { throw new Error(e) }
 
-        try { dataRespond = JSON.parse(text); }
-        catch { dataRespond = null; }
+        try { user = JSON.parse(text); }
+        catch { user = null; }
     }
 
-    if (dataRespond) {
-        console.log('dataRespond');
-        console.log(dataRespond);
-        localStorage.setItem('token', dataRespond.jwt);
-        localStorage.removeItem('expectFirstAuth');
-        console.log(localStorage.getItem('token'));
-        return dataRespond;
+    if (user) {
+        localStorage.setItem('token', user.jwt);
+        localStorage.setItem('userPic', user.picture);
+        return user;
     } else return null;
 }
 
@@ -64,17 +61,12 @@ export default function* watchSingUpGoogle() {
     while (true) {
         try {
             const { code } = yield take(actionsList.SEND_AUTH_CODE_TO_GOOGLE);
-            console.group('SEND_AUTH_CODE_TO_GOOGLE');
-            console.log(code);
-            console.groupEnd();
             const tokenId = yield call(fetchTokenIdFromGoogle, code);
             const user = yield call(fetchToBackToSetJWT, tokenId);
             yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
-            console.log('token');
-            console.log(user);
         }
         catch (err) {
-            console.error(err);
+            return new Error('watchSingUpGoogle')
         }
     }
 }
