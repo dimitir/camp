@@ -16,9 +16,9 @@ import _Login from './_Login';
 
 import Grid from '@material-ui/core/Grid';
 
-import HikesListIcon from '../pages/_icons/hikes/ListHikesIcon';
-import MyHikesIcon from '../pages/_icons/hikes/MyHikesIcon';
-import CreateHikeIcon from '../pages/_icons/hikes/CreateHikeIcon';
+import HikesIcon from '../pages/_icons/navbar/HikesIcon';
+import GoingIcon from '../pages/_icons/navbar/GoingIcon';
+import TrailsIcon from '../pages/_icons/navbar/TrailsIcon';
 import BlogIcon from '../pages/_icons/navbar/BlogIcon';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -30,6 +30,11 @@ import Paper from '@material-ui/core/Paper';
 
 const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
 
+
+    const [value, setValue] = React.useState(0);
+
+
+
     const linkVariant = 'body2';
     const iconSubscribe = 'body2';
     return (
@@ -40,55 +45,25 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: Pro
                     <Typography variant="h6" color="inherit" noWrap  >
                         GoHome
                    </Typography>
-                    {/*  <div className={style.novLinks}>
 
-                        <Link
-                            variant={linkVariant}
-                            color="textPrimary" href="/hikes/list"
-                            className={style.link}>
-                            Hikes
-                        </Link>
-                        <Link
-                            variant={linkVariant}
-                            color="textPrimary"
-                            href="#"
-                            className={style.link}>
-                            Trails
-                       </Link>
-                        <Link
-                            variant={linkVariant}
-                            color="textPrimary" href="#"
-                            className={style.link}>
-                            Info
-                        </Link>
-                        <Link
-                            variant={linkVariant}
-                            color="textPrimary" href="#"
-                            className={style.link}>
-                            We
-                        </Link>
-                    </div>
-                    <div className={style.navbarLogin}>
-                        <_Login
-                            showModal={showModal}
-                            user={user}
-                            userLogout={userLogout}
-                        />
-                    </div> */}
 
                     <BottomNavigation
                         className={style.novLinks}>
+                        value={value}
+                        onChange={(event: any, newValue: any) => {
+                            setValue(newValue);
+                        }}
 
-                        <BottomNavigationAction value='0' href="/hikes/list"
-                            icon={<HikesListIcon width='30' />} />
+                        <BottomNavigationAction href="/"
+                            icon={<HikesIcon width='30' />} />
 
-                        <BottomNavigationAction value='2'
-                            icon={<MyHikesIcon width='30' />} />
+                        <BottomNavigationAction href="/going"
+                            icon={<GoingIcon width='30' />} />
 
-                        <BottomNavigationAction value='1' href="/hikes/create"
-                            icon={<CreateHikeIcon width='30' />} />
-                            
-                        <BottomNavigationAction value='1' href="/hikes/create"
+                        <BottomNavigationAction
+                            icon={<TrailsIcon width='30' />} />
+
+                        <BottomNavigationAction
                             icon={<BlogIcon width='30' />} />
 
 

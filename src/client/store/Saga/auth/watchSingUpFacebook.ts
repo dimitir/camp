@@ -55,10 +55,7 @@ export default function* watchSingUpFacebook() {
             const { code } = yield take(actionsList.SEND_AUTH_CODE_TO_FACEBOOK)
             const access_token = yield call(fetchAccessTokenFromFacebook, code);
             const user = yield call(fetchToBackToSetJWT, access_token);
-            // const userData = yield call(getFacebookUserData, access_token);
             yield put({ type: actionsList.SET_AUTH_USER_DATA, user });
-            console.log('token');
-            console.log(user);
         }
         catch (err) {
             console.error(err);

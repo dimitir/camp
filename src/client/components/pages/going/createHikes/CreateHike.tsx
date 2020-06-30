@@ -21,7 +21,6 @@ import TeamInformaion from './_TeamInformaion';
 import EcoTypeDifficultLine from './_EcoTypeDifficultLine';
 import IsOpenEvent from './_OpenEvent';
 import SuccessDialog from './_SuccessDialog';
-import NavbarHikes from '../hikeNavbar/NavbarHikes';
 
 
 
@@ -99,7 +98,6 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user, added, hand
 
     return (
         <>
-            <NavbarHikes activeLink={'1'} />
             <Container className={classes.page}>
                 <Typography variant="h1" gutterBottom className={classes.pageTitle}>
                     Create new  hike

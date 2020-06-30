@@ -23,10 +23,11 @@ async function fetchToBackForUser(token: string) {
 
     try {
         dataRes = JSON.parse(text);
-        console.log('dataRes');
-        console.log(dataRes);
     }
-    catch { dataRes = null; }
+    catch {
+        dataRes = null;
+        throw new Error('Is no Json in response')
+    }
 
     if (dataRes) { return dataRes }
     else { console.log('Is no Json in response'); }
@@ -40,9 +41,8 @@ async function fetchToBackForUser(token: string) {
 export default function* watchActiveAuth() {
     try {
         const token = localStorage.getItem('token');
-        const state = yield select();
-        console.log('watchActiveAuth');
-        console.log(state);
+        // const state = yield select();
+
         if (token) {
             let user;
             try {
@@ -67,6 +67,3 @@ export default function* watchActiveAuth() {
         console.error(err);
     }
 }
-
-// add check when token is undefined;
-// add remuve email, user in db
