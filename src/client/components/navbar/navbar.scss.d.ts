@@ -3,7 +3,10 @@
 interface CssExports {
   'appBar': string;
   'buttonLogin': string;
+  'hikeNavbar': string;
+  'iconLabel': string;
   'link': string;
+  'navbarBox': string;
   'navbarLogin': string;
   'novLinks': string;
   'toolBar': string;

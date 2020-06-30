@@ -9,17 +9,22 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 
 
 
 const hikeNavbarStyle = (theme: Theme) =>
     createStyles({
-        hikeNavbar: {
+        navbarBox: {
+            padding: '20px 10px 10px 10px ',
             margin: 'auto',
             marginTop: '120px',
             maxWidth: '70%',
             width: '100%',
+            borderRadius: '20px'
+        },
+        hikeNavbar: {
             display: 'flex',
             justifyContent: 'space-around',
 
@@ -40,37 +45,41 @@ interface INavbarHikes {
 
 const NavBarHikes = ({ activeLink }: INavbarHikes) => {
 
+
+    const iconSubscribe = 'body2'
     const classes = useStales();
 
     return (
-
         <>
-            <BottomNavigation
-                value={activeLink}
-                showLabels className={classes.hikeNavbar}>
+           {/*  <Paper elevation={0} className={classes.navbarBox}>
+                <BottomNavigation
+                    value={activeLink}
+                    showLabels className={classes.hikeNavbar}>
 
-                <BottomNavigationAction value='0' href="/hikes/list" label={
-                    <Typography variant="body2" className={classes.iconLabel} gutterBottom>
-                        List
+                    <BottomNavigationAction value='0' href="/hikes/list" label={
+                        <Typography variant={iconSubscribe} className={classes.iconLabel} gutterBottom>
+                            List
                     </Typography>}
-                    icon={<HikesListIcon width='30' />} />
+                        icon={<HikesListIcon width='30' />} />
 
-                <BottomNavigationAction value='1' href="/hikes/create" label={
-                    <Typography variant="body2" className={classes.iconLabel} gutterBottom>
-                        Create
+                    <BottomNavigationAction value='1' href="/hikes/create" label={
+                        <Typography variant={iconSubscribe} className={classes.iconLabel} gutterBottom>
+                            Create
                     </Typography>}
-                    icon={<CreateHikeIcon width='30' />} />
-                <BottomNavigationAction value='2' label={
-                    <Typography variant="body2" className={classes.iconLabel} gutterBottom>
-                        Going
+                        icon={<CreateHikeIcon width='30' />} />
+                    <BottomNavigationAction value='2' label={
+                        <Typography variant={iconSubscribe} className={classes.iconLabel} gutterBottom>
+                            Going
                     </Typography>}
-                    icon={<MyHikesIcon width='30' />} />
-                <BottomNavigationAction value='3' label={
-                    <Typography variant="body2" className={classes.iconLabel} gutterBottom>
-                        Lead
+                        icon={<MyHikesIcon width='30' />} />
+                    <BottomNavigationAction value='3' label={
+                        <Typography variant={iconSubscribe} className={classes.iconLabel} gutterBottom>
+                            Lead
                     </Typography>}
-                    icon={<LeadHikesIcon width='30' />} />
-            </BottomNavigation>
+                        icon={<LeadHikesIcon width='30' />} />
+                </BottomNavigation>
+            </Paper> */}
+
 
         </>
     )

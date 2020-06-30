@@ -14,6 +14,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { TypeProps_HikeList } from './ContainerHikeList'
 import { Ihike } from '../../../../store/hikes/types';
+import Grid from '@material-ui/core/Grid';
+
+
+
+
 
 export interface TypeHike {
     name: String;
@@ -39,7 +44,8 @@ const hikeListStyle = () =>
             marginTop: '120px',
             marginBottom: '100px',
             padding: '30px',
-            borderRadius: '20px'
+            borderRadius: '20px',
+            background: '#FEFEFE'
         },
         date: {
             width: '46%',
@@ -79,7 +85,7 @@ const hikeListStyle = () =>
             width: '100%'
         },
         card: {
-            width: '70%',
+            width: '50%',
             margin: 'auto',
             marginBottom: '30px'
         },
@@ -88,6 +94,12 @@ const hikeListStyle = () =>
         },
         pos: {
             marginBottom: 12,
+        },
+        pageTitle: {
+            textAlign: 'center',
+            marginTop: '160px',
+            marginBottom: '180px',
+            fontWeight: 400
         },
     })
 
@@ -106,7 +118,7 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
 
     const hikeList = hikes.map((hike: Ihike, index: number) => {
         return (
-            <Card className={classes.card}>
+            <Card className={classes.card} key={index}>
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                         Word of the Day
@@ -134,37 +146,16 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
 
 
 
-    {/* <Card className={classes.card}>
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                Word of the Day
-                      </Typography>
-                            <Typography variant="h5" component="h2">
-                                {hike.name}
-                            </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                adjective
-                      </Typography>
-                            <Typography variant="body2" component="p">
-                                well meaning and kindly.
-                        <br />
-                                {'"a benevolent smile"'}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button size="small">Learn More</Button>
-                        </CardActions>
-                    </Card> */}
-
-
-
-
-
     return (
         <>
             <NavbarHikes activeLink={'0'} />
+
+            <Typography variant="h1" gutterBottom className={classes.pageTitle}>
+                Hikes
+                </Typography>
+
             <form>
-                <Paper elevation={3} className={classes.filterBlock}>
+                <Paper elevation={0} className={classes.filterBlock}>
 
                     <div className={classes.dateRegion}>
                         <div className={classes.date}>

@@ -1,5 +1,5 @@
 .appBar {
-    box-shadow: 2px 3px 2px #ebeced;
+    // box-shadow: 2px 3px 2px #ebeced;
     background-color: white;
     // height: 40px;
 }
@@ -44,7 +44,22 @@
     }
 }
 
-
-.navbarLogin{
+.navbarLogin {
     min-width: 30px;
+}
+
+.navbarBox {
+    padding: 20px 10px 10px 10px;
+    margin: auto;
+    margin-top: 120px;
+    max-width: 70%;
+    width: 100%;
+    border-radius: 20px;
+}
+.hikeNavbar {
+    display: "flex";
+    justify-content: "space-around";
+}
+.iconLabel {
+    margin-top: 5px;
 }
