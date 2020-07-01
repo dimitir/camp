@@ -151,7 +151,7 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user, added, hand
                     <TeamInformaion editorTeam={editorTeam} setEditorTeam={setEditorTeam} />
 
                     <Grid container justify="center">
-                        <Button color="primary" size="large" variant="contained" onClick={onSubmit} className={classes.buttonCreate}>Create Hike</Button>
+                        <Button color="primary" size="large" variant="outlined" onClick={onSubmit} className={classes.buttonCreate}>Create Hike</Button>
                     </Grid>
 
 

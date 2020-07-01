@@ -30,13 +30,12 @@ import Paper from '@material-ui/core/Paper';
 
 const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
 
+   /*  const [valueNav, setValueNav] = React.useState('recents');
 
-    const [value, setValue] = React.useState(0);
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+        setValueNav(newValue);
+    }; */
 
-
-
-    const linkVariant = 'body2';
-    const iconSubscribe = 'body2';
     return (
         <>
             <CssBaseline />
@@ -48,22 +47,18 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: Pro
 
 
                     <BottomNavigation
-                        className={style.novLinks}>
-                        value={value}
-                        onChange={(event: any, newValue: any) => {
-                            setValue(newValue);
-                        }}
-
-                        <BottomNavigationAction href="/"
+                        className={style.novLinks}
+                    >
+                        <BottomNavigationAction href="/" value="recents"
                             icon={<HikesIcon width='30' />} />
 
-                        <BottomNavigationAction href="/going"
+                        <BottomNavigationAction href="/going" value="favorites"
                             icon={<GoingIcon width='30' />} />
 
-                        <BottomNavigationAction
+                        <BottomNavigationAction value="nearby"
                             icon={<TrailsIcon width='30' />} />
 
-                        <BottomNavigationAction
+                        <BottomNavigationAction value="nearby33"
                             icon={<BlogIcon width='30' />} />
 
 

@@ -3,11 +3,12 @@ import Box from '@material-ui/core/Box';
 import DatePicker from '../going/createHikes/_DatePicker';
 import { useForm, Controller } from 'react-hook-form';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Paper } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 import RegionCountry from '../going/createHikes/_RegionCountry';
 import EcoTypeDifficult from '../going/createHikes/_EcoTypeDifficultLine';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import Link from '@material-ui/core/Link';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -15,7 +16,7 @@ import { TypeProps_HikeList } from './ContainerHikes'
 import { Ihike } from '../../../store/hikes/types';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '../_icons/hikes/SearchIcon';
-
+import Pagination from '@material-ui/lab/Pagination';
 
 
 export interface TypeHike {
@@ -86,18 +87,34 @@ const hikeListStyle = () =>
         hikesList: {
             marginTop: '100px',
             marginBottom: '50px',
-            width: '100%'
+            width: '100%',
         },
         card: {
-            width: '50%',
+            width: '55%',
             margin: 'auto',
-            marginBottom: '30px'
+            marginBottom: '50px',
+            borderRadius: '10px',
+            paddingLeft: '10px',
+            background: '#fffbfe',
+            height: '200px',
+            '&:hover': {
+                background: "#fff",
+            }
         },
-        title: {
-            fontSize: 14,
+
+        dateGap: {
+            fontSize: '14px',
+
         },
-        pos: {
-            marginBottom: 12,
+        subscription: {
+            marginTop: '5px',
+            marginBottom: '20px',
+        },
+        nameHike: {
+            marginTop: '5px'
+        },
+        footerCard: {
+            marginLeft: '10px'
         },
         pageTitle: {
             textAlign: 'center',
@@ -107,7 +124,10 @@ const hikeListStyle = () =>
         },
         searchIcon: {
             borderRadius: '20px',
-            marginBottom: '-12px',
+            marginBottom: '-15px',
+        },
+        pagination: {
+            marginBottom: '50px'
         }
     })
 
@@ -119,34 +139,61 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
     const [valueCountry, setValueCountry] = React.useState<string | null>(null);
     const [valueRegion, setValueRegion] = React.useState<string | null>(null);
 
-    console.log(hikes);
+    const [page, setPage] = React.useState(1);
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+    };
 
     const { register, handleSubmit, errors, reset, control, setValue } = useForm();
 
+    const paginationCount = () => {
+        if (hikes.length) {
+            const count = Math.round(hikes.length / 5);
+            return count
+        }
+        else return 10;
+    }
+    const dateFormat = (date: any) => {
+        date = new Date(date);
+        return `${date.getDate()}    ${(date.getMonth() + 1)}  ${date.getFullYear()}`;
+    }
 
-    const hikeList = hikes.map((hike: Ihike, index: number) => {
+
+    const paginationGap = (itemOnPage: number) => ({
+        from: (page - 1) * itemOnPage,
+        to: ((page - 1) * itemOnPage) + itemOnPage,
+    })
+
+    const gap = paginationGap(5);
+
+    const hikeList = hikes.slice(gap.from, gap.to).reverse().map((hike: Ihike, index: number) => {
+
         return (
-            <Card className={classes.card} key={index}>
-                <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {hike.start} - {hike.finish}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        {hike.name}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        adjective
-                      </Typography>
-                    <Typography variant="body2" component="p">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
+            <Link href='/kkk/jj' underline='none' className={classes.linkCard} >
+                <Card className={classes.card} key={index} elevation={0}>
+                    <CardContent>
+                        <Typography className={classes.dateGap} color="textSecondary" gutterBottom>
+                            {dateFormat(hike.start)} - {dateFormat(hike.finish)}
+                        </Typography>
+                        <Typography variant="h4" className={classes.nameHike} >
+                            {hike.name}
+                        </Typography>
+                        <Typography className={classes.subscription} color="textSecondary">
+                            {hike.subscription}
+                        </Typography>
+
+                    </CardContent>
+                    <CardActions className={classes.footerCard}>
+                        <Typography variant="body2" component="span">
+                            {hike.difficulty}
+                        </Typography>
+                        <Typography variant="body2" component="span">
+                            {hike.typeHike}
+                        </Typography>
+                    </CardActions>
+                </Card>
+            </Link>
+
         )
 
     })
@@ -182,14 +229,11 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
                                 <EcoTypeDifficult control={control} errors={errors} />
                             </div>
 
-                            {/* <IconButton className={classes.searchIcon}>
-                                <SearchIcon width='25' />
-                            </IconButton> */}
+
                             <Button
                                 className={classes.searchIcon}
-                                variant="outlined"
-                                color="secondary"
-                                startIcon={<SearchIcon width='20' />}
+                                variant='outlined'
+                                startIcon={<SearchIcon width='16' />}
                             >
                                 result
                             </Button>
@@ -202,10 +246,11 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
 
             <div className={classes.hikesList}>
                 {hikeList}
-
             </div>
 
-
+            <Grid container justify="center" className={classes.pagination}>
+                <Pagination count={paginationCount()} page={page} onChange={handleChange} />
+            </Grid>
         </>
     )
 }
