@@ -1,4 +1,5 @@
 export interface Ihike {
+    _id: string;
     name: String;
     start: Date;
     finish: Date;

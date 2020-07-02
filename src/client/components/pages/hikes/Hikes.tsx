@@ -98,7 +98,8 @@ const hikeListStyle = () =>
             background: '#fffbfe',
             height: '200px',
             '&:hover': {
-                background: "#fff",
+                boxShadow: '2px 3px 2px #ebeced',
+
             }
         },
 
@@ -169,8 +170,8 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
     const hikeList = hikes.slice(gap.from, gap.to).reverse().map((hike: Ihike, index: number) => {
 
         return (
-            <Link href='/kkk/jj' underline='none' className={classes.linkCard} >
-                <Card className={classes.card} key={index} elevation={0}>
+            <Link href={`/hike:${hike._id}`} underline='none' key={index} >
+                <Card className={classes.card} elevation={0}>
                     <CardContent>
                         <Typography className={classes.dateGap} color="textSecondary" gutterBottom>
                             {dateFormat(hike.start)} - {dateFormat(hike.finish)}

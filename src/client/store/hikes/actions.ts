@@ -18,6 +18,15 @@ export const hikeList = (hikes: TypeHikesList) => ({
     hikes: hikes,
 })
 
+export const queryHike = (hikeId: string) => ({
+    type: dispatchActions.GET_HIKE,
+    hikeId: hikeId,
+})
+export const getHike = (hikeId: string) => ({
+    type: dispatchActions.GET_HIKE,
+    hikeId: hikeId,
+})
+
 
 
 

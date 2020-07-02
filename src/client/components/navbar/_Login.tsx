@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-import { useForm } from "react-hook-form";
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
+
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Menu from '@material-ui/core/Menu';
@@ -46,9 +42,6 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
     const handleLogin = () => {
         if (location.pathname) {
             localStorage.setItem('lastLocation', location.pathname);
-            console.group('lastLocation');
-            console.log(localStorage.getItem('lastLocation'));
-            console.log(location.pathname);
             console.groupEnd();
         }
         showModal(modalName.SING_UP_ALL)

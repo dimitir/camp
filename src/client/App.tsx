@@ -8,6 +8,7 @@ import ContainerHikeCreate from './components/pages/going/createHikes/ContainerC
 import ContainerModalsCreator from './components/modals/ContainerModalsCreator';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ContainerHikes from './components/pages/hikes/ContainerHikes';
+import ContainerHikeOne from './components/pages/hikes/hikeOne/ContainerHikeOne';
 
 
 
@@ -23,9 +24,10 @@ export default class App extends Component {
                     <ContainerNavbar />
                     <Switch>
                         <Route component={ContainerHikes} path='/' exact />
+                        <Route component={ContainerHikeOne} path='/hike:id' />
                         <Route component={ContainerHikeCreate} path='/going' exact />
-                        
-                        <Route component={AuthCallback}  />
+
+                        <Route component={AuthCallback} />
                     </Switch>
                 </Router>
             </>
