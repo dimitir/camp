@@ -31,4 +31,10 @@ export interface TypeAdded {
     added: boolean;
 };
 
-export interface ActionTypeHike extends TypeAdded, TypeHikesList { }
+
+export interface TypeSetHike {
+    type: string;
+    hike: Ihike;
+};
+
+export interface ActionTypeHike extends TypeAdded, TypeHikesList, TypeSetHike { }

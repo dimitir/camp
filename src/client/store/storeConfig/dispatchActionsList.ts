@@ -17,7 +17,8 @@ const actionsApp = keyMirror({
     ADD_HIKE: true,
     HIKE_ADDED: true,
     HIKES_LIST: true,
-    GET_HIKE: true,
+    QUERY_HIKE: true,
+    SET_HIKE: true,
 });
 
 export default actionsApp;

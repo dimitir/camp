@@ -11,7 +11,7 @@ const MapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const MapStateToProps = (state: RootStateType) => ({
-    hikes: state.hike.hikes,
+    hike: state.hike.hike,
 })
 
 

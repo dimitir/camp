@@ -6,6 +6,7 @@ interface CssExports {
   'hikeNavbar': string;
   'iconLabel': string;
   'link': string;
+  'logo': string;
   'navbarBox': string;
   'navbarLogin': string;
   'novLinks': string;

@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 
 import { PropTypes_Navbar } from './ContainerNavbar';
 import style from './navbar.scss';
@@ -24,43 +24,43 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Paper from '@material-ui/core/Paper';
-
-
+import { Link } from 'react-router-dom';
 
 
 const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
 
-   /*  const [valueNav, setValueNav] = React.useState('recents');
+    /*  const [valueNav, setValueNav] = React.useState('recents');
+ 
+     const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+         setValueNav(newValue);
+     }; */
 
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-        setValueNav(newValue);
-    }; */
+    const widthIcon = '25'
 
     return (
         <>
             <CssBaseline />
             <AppBar className={style.appBar} position="static" color="default" elevation={0} >
                 <Toolbar className={style.toolBar} >
-                    <Typography variant="h6" color="inherit" noWrap  >
+                    <Link to='/' className={style.logo} key='logo'><Typography variant="h6" color="inherit" noWrap  >
                         GoHome
-                   </Typography>
+                   </Typography></Link>
 
 
                     <BottomNavigation
                         className={style.novLinks}
                     >
-                        <BottomNavigationAction href="/" value="recents"
-                            icon={<HikesIcon width='30' />} />
+                        <BottomNavigationAction value="hikes"
+                            icon={<Link to='/' key='hikes'><HikesIcon width={widthIcon} /></Link>} />
 
-                        <BottomNavigationAction href="/going" value="favorites"
-                            icon={<GoingIcon width='30' />} />
+                        <BottomNavigationAction value="going"
+                            icon={<Link to='/going' key='going'><GoingIcon width={widthIcon} /></Link>} />
 
-                        <BottomNavigationAction value="nearby"
-                            icon={<TrailsIcon width='30' />} />
+                        <BottomNavigationAction value="trails"
+                            icon={<Link to='/trails' key='trails'><TrailsIcon width='23' /></Link>} />
 
-                        <BottomNavigationAction value="nearby33"
-                            icon={<BlogIcon width='30' />} />
-
+                        <BottomNavigationAction value="blog"
+                            icon={<Link to='/blog' key='blog'><BlogIcon width={widthIcon} /></Link>} />
 
                     </BottomNavigation>
 
@@ -72,8 +72,8 @@ const Navbar: React.FC<PropTypes_Navbar> = ({ showModal, user, userLogout }: Pro
                         />
                     </div>
 
-                </Toolbar>
-            </AppBar>
+                </Toolbar >
+            </AppBar >
         </>
     )
 }

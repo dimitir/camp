@@ -15,7 +15,7 @@ const Hike = new mongoose.Schema({
   region: String,
   openEvent: Boolean,
   teamInfo: Array,
-  participans: Array,
+  participants: Array,
   leaderEmail: String,
 });
 

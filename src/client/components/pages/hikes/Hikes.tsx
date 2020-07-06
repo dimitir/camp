@@ -8,7 +8,7 @@ import RegionCountry from '../going/createHikes/_RegionCountry';
 import EcoTypeDifficult from '../going/createHikes/_EcoTypeDifficultLine';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -17,6 +17,7 @@ import { Ihike } from '../../../store/hikes/types';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '../_icons/hikes/SearchIcon';
 import Pagination from '@material-ui/lab/Pagination';
+import { Link } from 'react-router-dom'
 
 
 export interface TypeHike {
@@ -97,9 +98,10 @@ const hikeListStyle = () =>
             paddingLeft: '10px',
             background: '#fffbfe',
             height: '200px',
+            textDecaration: 'none',
             '&:hover': {
-                boxShadow: '2px 3px 2px #ebeced',
-
+                boxShadow: '2px 5px 4px #ebeced',
+                textDecaration: 'none',
             }
         },
 
@@ -112,7 +114,10 @@ const hikeListStyle = () =>
             marginBottom: '20px',
         },
         nameHike: {
-            marginTop: '5px'
+            marginTop: '5px',
+            '&:hover': {
+                textDecaration: 'none',
+            }
         },
         footerCard: {
             marginLeft: '10px'
@@ -129,6 +134,11 @@ const hikeListStyle = () =>
         },
         pagination: {
             marginBottom: '50px'
+        },
+        link: {
+            textDecaration: 'inherit',
+            color: 'inherit'
+
         }
     })
 
@@ -170,8 +180,8 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
     const hikeList = hikes.slice(gap.from, gap.to).reverse().map((hike: Ihike, index: number) => {
 
         return (
-            <Link href={`/hike:${hike._id}`} underline='none' key={index} >
-                <Card className={classes.card} elevation={0}>
+            <Link to={`/hike/${hike._id}`} style={{ textDecoration: 'none' }} key={index}>
+                <Card className={classes.card}  elevation={0}>
                     <CardContent>
                         <Typography className={classes.dateGap} color="textSecondary" gutterBottom>
                             {dateFormat(hike.start)} - {dateFormat(hike.finish)}

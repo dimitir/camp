@@ -24,7 +24,7 @@ export default class App extends Component {
                     <ContainerNavbar />
                     <Switch>
                         <Route component={ContainerHikes} path='/' exact />
-                        <Route component={ContainerHikeOne} path='/hike:id' />
+                        <Route component={ContainerHikeOne} path='/hike/:id' />
                         <Route component={ContainerHikeCreate} path='/going' exact />
 
                         <Route component={AuthCallback} />

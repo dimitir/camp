@@ -5,11 +5,13 @@ import { ActionTypeHike, Ihike } from './types';
 export interface InitialStateHike {
     added: boolean;
     hikes: [Ihike],
+    hike: Ihike
 }
 
 const initialState = {
     added: false,
-    hikes: []
+    hikes: [],
+    hike: {}
 }
 
 
@@ -26,6 +28,12 @@ const hikeReducer = (state = initialState, action: ActionTypeHike) => {
                 ...state,
                 hikes: action.hikes
             }
+        case dispatchAction.SET_HIKE:
+            return {
+                ...state,
+                hike: action.hike
+            }
+            
         default: return state;
     }
 }

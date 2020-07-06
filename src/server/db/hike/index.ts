@@ -1,7 +1,8 @@
 import { createHike } from './create';
-import { getHikes } from './get';
+import { getHikes, getHikeItem } from './get';
 
 export {
     createHike,
     getHikes,
+    getHikeItem,
 }

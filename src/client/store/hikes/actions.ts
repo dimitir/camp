@@ -1,5 +1,5 @@
 import dispatchActions from '../storeConfig/dispatchActionsList';
-import { TypeAddHike, TypeHikesList } from './types';
+import { TypeAddHike, TypeHikesList, Ihike } from './types';
 
 
 export const addHike = (hike: TypeAddHike) => ({
@@ -19,12 +19,14 @@ export const hikeList = (hikes: TypeHikesList) => ({
 })
 
 export const queryHike = (hikeId: string) => ({
-    type: dispatchActions.GET_HIKE,
+    type: dispatchActions.QUERY_HIKE,
     hikeId: hikeId,
 })
-export const getHike = (hikeId: string) => ({
-    type: dispatchActions.GET_HIKE,
-    hikeId: hikeId,
+
+
+export const setHike = (hike: Ihike) => ({
+    type: dispatchActions.SET_HIKE,
+    hike: hike,
 })
 
 

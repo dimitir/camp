@@ -116,13 +116,8 @@ const _Login = ({ showModal, user, userLogout }: PropTypes_Navbar) => {
 
         )
     }
-    else if (token) {
-        return (
-            <>
-                <Avatar className={classes.userImg} src={userPic} />
-            </>
-        )
-    }
+
+
     else {
         return (
             <>
