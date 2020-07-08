@@ -145,6 +145,25 @@ const hikeListStyle = () =>
 
 const useStyles = makeStyles(hikeListStyle);
 
+
+
+
+const dateFormat = (start: any, finish: any) => {
+
+    if (start && finish) {
+        start = new Date(start);
+        finish = new Date(finish);
+        if (start.getMonth() === finish.getMonth()) {
+            return `${start.getDate()} - ${finish.getDate()}  ${finish.toLocaleString('default', { month: 'long' })} `
+        }
+        else {
+            return `${start.getDate()} ${start.toLocaleString('default', { month: 'long' })} - ${finish.getDate()}  ${finish.toLocaleString('default', { month: 'long' })} `;
+        }
+    }
+    else return null
+
+}
+
 const HikeList = ({ hikes }: TypeProps_HikeList) => {
     const classes = useStyles();
     const [valueCountry, setValueCountry] = React.useState<string | null>(null);
@@ -164,27 +183,27 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
         }
         else return 10;
     }
-    const dateFormat = (date: any) => {
-        date = new Date(date);
-        return `${date.getDate()}    ${(date.getMonth() + 1)}  ${date.getFullYear()}`;
-    }
+
 
 
     const paginationGap = (itemOnPage: number) => ({
         from: (page - 1) * itemOnPage,
         to: ((page - 1) * itemOnPage) + itemOnPage,
     })
-
     const gap = paginationGap(5);
 
-    const hikeList = hikes.slice(gap.from, gap.to).reverse().map((hike: Ihike, index: number) => {
+    console.log(gap.from);
+    console.log(gap.to);
+
+    const listHike = hikes.slice().reverse();
+    const hikeList = listHike.slice(gap.from, gap.to).map((hike: Ihike, index: number) => {
 
         return (
             <Link to={`/hike/${hike._id}`} style={{ textDecoration: 'none' }} key={index}>
-                <Card className={classes.card}  elevation={0}>
+                <Card className={classes.card} elevation={0}>
                     <CardContent>
                         <Typography className={classes.dateGap} color="textSecondary" gutterBottom>
-                            {dateFormat(hike.start)} - {dateFormat(hike.finish)}
+                            {dateFormat(hike.start, hike.finish)}
                         </Typography>
                         <Typography variant="h4" className={classes.nameHike} >
                             {hike.name}
@@ -266,5 +285,5 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
     )
 }
 
-
+export { dateFormat };
 export default HikeList;

@@ -9,7 +9,7 @@ export const getHikes = async () => {
 export const getHikeItem = async (id: string) => {
     console.group('id inside');
     console.log(id);
-    const result = await HikeSchema.findById(id, '-participants');
+    const result = await HikeSchema.findById(id, '-participants -leaderEmail -participans');
     console.log(result);
     return result;
 };

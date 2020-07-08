@@ -8,7 +8,7 @@ const Hike = new mongoose.Schema({
   finish: Date,
   subscription: String,
   discription: Array,
-  eco: String,
+  eco: Boolean,
   difficulty: String,
   typeHike: String,
   country: String,

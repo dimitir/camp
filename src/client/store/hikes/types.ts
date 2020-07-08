@@ -12,7 +12,7 @@ export interface Ihike {
     typeHike: String,
     region: String,
     country: String,
-    leaderEmail: String
+    leaderEmail: String,
 }
 
 export interface TypeAddHike {
