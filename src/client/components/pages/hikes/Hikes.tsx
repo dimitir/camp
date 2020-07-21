@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Box from '@material-ui/core/Box';
 import DatePicker from '../going/createHikes/_DatePicker';
 import { useForm, Controller } from 'react-hook-form';
@@ -91,16 +91,16 @@ const hikeListStyle = () =>
             width: '100%',
         },
         card: {
+
             width: '55%',
             margin: 'auto',
             marginBottom: '50px',
             borderRadius: '10px',
             paddingLeft: '10px',
             background: '#fffbfe',
-            height: '200px',
+            // height: '200px',
             textDecaration: 'none',
             '&:hover': {
-                boxShadow: '2px 5px 4px #ebeced',
                 textDecaration: 'none',
             }
         },
@@ -120,7 +120,11 @@ const hikeListStyle = () =>
             }
         },
         footerCard: {
-            marginLeft: '10px'
+            marginLeft: '10px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: '10px',
         },
         pageTitle: {
             textAlign: 'center',
@@ -169,6 +173,20 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
     const [valueCountry, setValueCountry] = React.useState<string | null>(null);
     const [valueRegion, setValueRegion] = React.useState<string | null>(null);
 
+    const fetchData = async () => {
+        const { data } = await axios({
+            url: `${env.host}/hike/getOne`,
+            method: 'post',
+            data: { id: hikeId }
+        })
+        setHike(data);
+        console.log(data);
+    }
+    useEffect(() => {
+        fetchData()
+    }, []);
+
+
     const [page, setPage] = React.useState(1);
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
@@ -199,30 +217,35 @@ const HikeList = ({ hikes }: TypeProps_HikeList) => {
     const hikeList = listHike.slice(gap.from, gap.to).map((hike: Ihike, index: number) => {
 
         return (
-            <Link to={`/hike/${hike._id}`} style={{ textDecoration: 'none' }} key={index}>
-                <Card className={classes.card} elevation={0}>
-                    <CardContent>
-                        <Typography className={classes.dateGap} color="textSecondary" gutterBottom>
-                            {dateFormat(hike.start, hike.finish)}
-                        </Typography>
-                        <Typography variant="h4" className={classes.nameHike} >
-                            {hike.name}
-                        </Typography>
-                        <Typography className={classes.subscription} color="textSecondary">
-                            {hike.subscription}
-                        </Typography>
+            <Card className={classes.card} elevation={0}>
+                <CardContent>
+                    <Typography className={classes.dateGap} color="textSecondary" gutterBottom>
+                        {dateFormat(hike.start, hike.finish)}
+                    </Typography>
+                    <Typography variant="h4" className={classes.nameHike} >
+                        {hike.name}
+                    </Typography>
+                    <Typography className={classes.subscription} color="textSecondary">
+                        {hike.subscription}
+                    </Typography>
 
-                    </CardContent>
-                    <CardActions className={classes.footerCard}>
+                </CardContent>
+                <CardActions className={classes.footerCard}>
+                    <div>
                         <Typography variant="body2" component="span">
                             {hike.difficulty}
                         </Typography>
                         <Typography variant="body2" component="span">
                             {hike.typeHike}
-                        </Typography>
-                    </CardActions>
-                </Card>
-            </Link>
+                        </Typography>F
+                        </div>
+                    <Link to={`/hike/${hike._id}`} style={{ textDecoration: 'none' }} key={index}>
+                        <Button   >
+                            Details
+                        </Button>
+                    </Link>
+                </CardActions>
+            </Card>
 
         )
 

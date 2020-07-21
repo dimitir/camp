@@ -10,7 +10,6 @@ import { dateFormat } from '../Hikes';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ReactHtmlParser, { processNodes, convertNodeToElement } from 'react-html-parser';
 
-
 const hikeStyle = () =>
     createStyles({
         page: {
