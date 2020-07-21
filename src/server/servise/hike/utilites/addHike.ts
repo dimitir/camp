@@ -34,8 +34,6 @@ const _addHikeIdToUserLeader = async (hikeId: string, leadEmail: string) => {
 
 const addHike = async (req: Request, res: Response, next: NextFunction) => {
     const { hike } = req.body;
-    console.log(hike);
-
     let newHike;
     try {
         newHike = await _addHikeToHikeDoc(hike);

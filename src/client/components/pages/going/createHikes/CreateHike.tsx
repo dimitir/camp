@@ -42,9 +42,6 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user, added, hand
     });
 
 
-
-
-
     const { register, handleSubmit, errors, reset, control, setValue } = useForm({
         validationSchema: schema
     });
@@ -55,13 +52,8 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user, added, hand
     const [valueCountry, setValueCountry] = React.useState<string | null>(null);
     const [valueRegion, setValueRegion] = React.useState<string | null>(null);
 
-    const encodeHtmltoUtf = (str: string) => {
-        return new TextEncoder().encode(editorDesctiption)
-    }
 
-    // const uint8array = new TextEncoder().encode(valueTextEditor);
-    // var str = new TextDecoder('utf-8').decode(uint8array);
-    console.log(added);
+
 
     const handleSucceess = () => {
         reset();
@@ -78,14 +70,14 @@ const CreateHike: React.FC<TypeProps_CreateHike> = ({ addHike, user, added, hand
             start: startDate,
             finish: finishDate,
             subscription: subscription,
-            discription: encodeHtmltoUtf(editorDesctiption),
+            discription: editorDesctiption,
             openEvent: openEvent,
             eco: eco,
             difficulty: diff,
             typeHike: typeHike,
             country: valueCountry,
             region: valueRegion,
-            teamInfo: encodeHtmltoUtf(editorTeam),
+            teamInfo: editorTeam,
             leaderEmail: user.email
         }
         console.log(hike);

@@ -33,10 +33,8 @@ const SuccessDialog = ({ added, handleSucceess }: ISuccessDialog) => {
             >
                 <DialogTitle id="alert-dialog-title">Hike was successfull created</DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        <Grid container justify="center">
-                            Hava a great adventure!
-                        </Grid>
+                    <DialogContentText id="alert-dialog-description" style={{ textAlign: 'center' }}  >
+                        Hava a great adventure!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

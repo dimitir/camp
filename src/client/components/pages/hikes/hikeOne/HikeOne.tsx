@@ -8,11 +8,14 @@ import axios from 'axios';
 import env from '../../../../../env';
 import { dateFormat } from '../Hikes';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ReactHtmlParser, { processNodes, convertNodeToElement } from 'react-html-parser';
 
 
 const hikeStyle = () =>
     createStyles({
         page: {
+            margin: 'auto',
+            maxWidth: '700px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
@@ -39,13 +42,19 @@ const hikeStyle = () =>
 
         },
         typeLine: {
+            marginTop: '160px',
+           
+            width: '100%',
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
         },
         progress: {
             position: 'absolute',
             top: '50%',
             left: '50%',
+        },
+        discription: {
 
         }
 
@@ -72,6 +81,9 @@ interface IHike {
 
 // const isHike = (hike: any): hike is IHike => { return true }
 
+const utfToHtml = (str: any) => new TextDecoder('utf-8').decode(str);
+
+
 const HikeOne = ({ match, }: any) => {
 
     const classes = useStyles();
@@ -85,12 +97,13 @@ const HikeOne = ({ match, }: any) => {
             finish: Date,
             typeHike: '',
             difficulty: '',
-            discription: [],
+            discription: '',
             country: '',
             region: '',
             openEvent: false,
 
-        }
+        },
+
     );
 
     const fetchData = async () => {
@@ -105,10 +118,13 @@ const HikeOne = ({ match, }: any) => {
     useEffect(() => {
         fetchData()
     }, []);
+
     if (hike.name) {
+        console.log(hike.discription);
         return (
             <>
                 <div className={classes.page}>
+
                     <Typography variant="body1" className={classes.region} >
                         {hike.country}  {hike.region} region
                     </Typography>
@@ -127,23 +143,24 @@ const HikeOne = ({ match, }: any) => {
                     </Typography>
 
                     <div className={classes.typeLine}>
-                        <Typography variant="body1" >
+                        <Typography variant="body1"  >
                             {hike.openEvent ? ` open event` : `close team event`}
                         </Typography>
 
                         <Typography variant="body1"   >
-                            {hike.difficulty} difficulty
+                            {hike.difficulty}
                         </Typography>
 
-                        <Typography variant="body1"   >
-                            {hike.typeHike} type
-                    </Typography>
-
+                        <Typography variant="body1"  >
+                            type {hike.typeHike}
+                        </Typography>
                     </div>
+
+                    <div className={classes.discription}>
+                        {ReactHtmlParser(hike.discription)}
+                    </div>
+
                 </div>
-
-
-
             </>
         )
     }
